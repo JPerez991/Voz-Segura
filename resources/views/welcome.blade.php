@@ -47,7 +47,7 @@
     </section>
 
     <!-- Sección de Servicios -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <x-card>
             <x-card-header>
                 <x-card-title>
@@ -75,7 +75,7 @@
         <x-card>
             <x-card-header>
                 <x-card-title>
-                    <x-calendar-icon class="h-6 w-6 text-purple-600" />
+                    <x-calendar-icon class="h-6 w-6  " />
                     <span>Sesiones Programadas</span>
                 </x-card-title>
             </x-card-header>
@@ -106,3 +106,21 @@
          </a>
     </section>
 </main>
+
+
+<footer class="bg-purple-900 text-purple-100 mt-16">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <!-- Puedes quitar el ícono si no quieres el logo aquí -->
+                <span class="text-xl font-semibold">Vos Segura</span>
+            </div>
+            <nav class="flex space-x-4">
+                <a href="#" class="text-sm hover:text-white transition-colors duration-200">Acerca de</a>
+                <a href="#" class="text-sm hover:text-white transition-colors duration-200">Contacto</a>
+                <a href="#" class="text-sm hover:text-white transition-colors duration-200">Privacidad</a>
+                <a href="#" class="text-sm hover:text-white transition-colors duration-200">Términos</a>
+            </nav>
+        </div>
+    </div>
+</footer>
