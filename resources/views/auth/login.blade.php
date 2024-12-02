@@ -9,7 +9,7 @@
     <style>
         /* Estilos para el fondo de la página */
         body {
-            background-image: url('img/vista-login/6.jpg');
+            background-image: url('img/vista-login/mujerPuerpe.jpg');
             /* Ruta relativa directa */
             background-size: cover;
             /* Cambia 'cover' a 'contain' */
@@ -37,6 +37,16 @@
             max-width: 400px;
             margin: auto;
         }
+
+        /* Tipografía personalizada */
+        body {
+            font-family: Delius', 'sans-serif';
+        }
+
+        h1 {
+            font-family: 'Delius', 'sans-serif';
+        }
+        
     </style>
 </head>
 
@@ -64,7 +74,7 @@
             <!-- Enlace para registrar cuenta y botón de login -->
             <div class="flex items-center justify-between">
                 <a href="{{ route('register') }}" class="text-sm text-gray-600 hover:text-gray-900">¿No tienes una cuenta?</a>
-                <button type="submit" class="ml-3 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <button type="submit" class="ml-3 bg-pink-700 text-white px-4 py-2 rounded-md hover:bg-yellow-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-600">
                     Iniciar Sesión
                 </button>
             </div>

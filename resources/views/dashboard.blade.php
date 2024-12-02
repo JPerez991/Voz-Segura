@@ -5,8 +5,16 @@
     <body class="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
 
     <div class="container mx-auto p-4">
-        <!-- Usamos el componente ProfileCard y pasamos la información del perfil -->
-        <x-profile-card :profile="$profile" />
+        
+        <!-- Condicionamos el componente de la psicóloga -->
+        @if(Auth::user()->rol === 'psicologa')
+            <!-- Usamos el componente ProfileCard para psicólogas -->
+            <x-profile-card-psicologa :profile="$profile" />
+        @else
+            <!-- Usamos el componente ProfileCard para usuarias -->
+            <x-profile-card :profile="$profile" />
+        @endif
+
         <!-- Fin de la sección del perfil -->
     </div>
 
@@ -50,7 +58,7 @@
             </a>
 
             <!-- Tarjeta Sesiones Programadas -->
-            <a href="{{ route('forums.index') }}" class="block group">
+            <a href="{{ route('sessions.index') }}" class="block group">
                 <x-card class="transition transform hover:scale-105">
                     <x-card-header>
                         <x-card-title>
@@ -91,12 +99,12 @@
                     <!-- Puedes quitar el ícono si no quieres el logo aquí -->
                     <span class="text-xl font-semibold">Voz Segura</span>
                 </div>
-                <nav class="flex space-x-4">
+              <!--  <nav class="flex space-x-4">
                     <a href="#" class="text-sm hover:text-white transition-colors duration-200">Acerca de</a>
                     <a href="#" class="text-sm hover:text-white transition-colors duration-200">Contacto</a>
                     <a href="#" class="text-sm hover:text-white transition-colors duration-200">Privacidad</a>
                     <a href="#" class="text-sm hover:text-white transition-colors duration-200">Términos</a>
-                </nav>
+                </nav> -->
             </div>
         </div>
     </footer>

@@ -12,19 +12,35 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+
+        
+        
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+    
+        <style>
+
+        body {
+            font-family: Delius', 'sans-serif';
+        }
+
+        h1,h2 {
+            font-family: 'Delius', 'sans-serif';
+        }
+        
+    </style>
+
     </head>
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
             <div class="container px-5">
-                <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+                <a class="navbar-brand" href="#page-top">Voz segura</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Sign Up</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Log In</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Registrar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Entrar</a></li>
                     </ul>
                 </div>
             </div>
@@ -34,8 +50,8 @@
             <div class="masthead-content">
                 <div class="container px-5">
                     <h1 class="masthead-heading mb-0">Bienvenidos </h1>
-                    <h2 class="masthead-subheading mb-0">A tu Estapacio Seguro</h2>
-                    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Learn More</a>
+                    <h2 class="masthead-subheading mb-0">A tu Espacio Seguro</h2>
+                    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Ver Mas</a>
                 </div>
             </div>
             <div class="bg-circle-1 bg-circle"></div>
@@ -52,8 +68,9 @@
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="p-5">
-                            <h2 class="display-4">For those about to rock...</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        <h2 class="display-4">Eres fuerte</h2> 
+                        <p>Recuerda, eres más fuerte de lo que crees. No estás sola en esta lucha; a tu lado hay una comunidad dispuesta a apoyarte en cada paso del camino. Aunque enfrentemos desafíos, nuestra resiliencia y valentía son más poderosas que cualquier obstáculo. Juntas, somos invencibles, capaces de transformar el dolor en fuerza y la desesperanza en esperanza. No olvides que en cada caída, tienes la oportunidad de levantarte más fuerte que antes. Aquí encontrarás
+                        un espacio seguro para compartir tus experiencias, recibir apoyo y construir un futuro lleno de esperanza y empoderamiento.</p>                  
                         </div>
                     </div>
                 </div>
@@ -68,9 +85,11 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="p-5">
-                            <h2 class="display-4">We salute you!</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
-                        </div>
+                        <h2 class="display-4">Nunca te rindas</h2> 
+                        <p>No importa cuán difíciles sean los días, cada paso hacia adelante es una victoria en sí misma. La fortaleza se encuentra en la perseverancia, en la capacidad de levantarse una y otra vez, sin importar cuántas veces caigamos. 
+                            A través de cada desafío, ganamos sabiduría, fuerza y una comprensión más profunda de nuestra propia capacidad para superar adversidades. Juntas, podemos superar cualquier obstáculo, apoyándonos mutuamente y recordándonos que, 
+                            aunque el camino puede ser difícil, nunca estamos solas. Este es un lugar donde podemos encontrar la fuerza que necesitamos, aprender de nuestras experiencias y avanzar con determinación hacia un futuro mejor.</p>               
+                              </div>
                     </div>
                 </div>
             </div>
@@ -84,16 +103,18 @@
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="p-5">
-                            <h2 class="display-4">Let there be rock!</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
-                        </div>
+                        <h2 class="display-4">Juntas somos más fuertes</h2> 
+                        <p>En este espacio, encontrarás apoyo y comprensión en cada momento. Aquí, cada voz es importante y cada historia tiene el poder de inspirar y transformar. Al compartir nuestras experiencias, creamos un lazo de empatía y solidaridad que nos fortalece a todas. Conectemos, compartamos y crezcamos juntas, sabiendo que en la unión encontramos la fortaleza para enfrentar cualquier desafío que se nos presente. Este es tu espacio seguro, 
+                            un lugar donde puedes ser tú misma, donde puedes encontrar consuelo y donde juntas podemos construir un futuro lleno de esperanza y posibilidades. Recuerda que, unidas, somos capaces de lograr grandes cosas y superar cualquier adversidad.</p>                
+                            </div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- Footer-->
         <footer class="py-5 bg-black">
-            <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2023</p></div>
+       
+            <div class="container px-5"><p class="m-0 text-center text-white small">VozSegura &copy; Your Website 2024</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

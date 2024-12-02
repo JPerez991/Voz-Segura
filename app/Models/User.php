@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\controllers\PrograminSession;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+
+
 
 class User extends Authenticatable
 {
@@ -60,9 +64,18 @@ class User extends Authenticatable
      */
     public function roll()
     {
-        // Si tienes una relación con otro modelo para el rol, como Role, puedes definirla aquí.
-        // return $this->belongsTo(Role::class, 'rol');
-        
         return $this->rol; // Si 'rol' es solo un atributo del modelo User
+    }
+
+    /** * Relación uno a muchos para obtener las sesiones donde el usuario actúa como psicóloga. * * @return \Illuminate\Database\Eloquent\Relations\HasMany */ 
+    public function sesionesComoPsicologa()
+    {
+        return $this->hasMany(Sessions::class, 'psicologa_id');
+    }
+    /** * Relación uno a muchos para obtener las sesiones donde el usuario es el cliente o participante. * * @return \Illuminate\Database\Eloquent\Relations\HasMany */ 
+
+    public function sesionesComoUsuario()
+    {
+        return $this->hasMany(Sessions::class, 'usuario_id');
     }
 }

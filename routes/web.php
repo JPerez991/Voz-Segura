@@ -4,8 +4,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\SessionsController;
+
+
+
 
 
 
@@ -48,13 +53,27 @@ Route::middleware('auth')->group(function () {
 
 
 
-    //ruta foros
+
+    // Rutas para foros
     Route::resource('forums', ForumController::class);
     Route::get('/forums/create', [ForumController::class, 'create'])->name('forums.create'); // Ruta para crear los foros
     Route::get('/forums', [ForumController::class, 'index'])->name('forums.index'); // Ruta para listar los foros
     Route::get('/forums/{id}', [ForumController::class, 'show'])->name('forums.show'); // Ruta para mostrar un foro específico con sus respuestas
     Route::post('/forums/{id}/reply', [ForumController::class, 'storeReply'])->name('forums.storeReply'); // Ruta para enviar una respuesta a un foro
 
+
+    
+    // Rutas para mensajes privados
+    Route::get('messages/{recipientId}', [MessageController::class, 'index'])->name('messages.index');
+    Route::post('messages/{recipientId}', [MessageController::class, 'store'])->name('messages.store');
+    
+    // Rutas para chat
+    Route::middleware('auth')->group(function() {
+        Route::get('/chat/{recipientId}', [ChatController::class, 'index'])->name('chat.index');
+        Route::post('/chat/{recipientId}', [ChatController::class, 'store']);
+    });
+
+    //ruta foros
 
 });
 
@@ -68,13 +87,21 @@ Route::get('/register', [RegisteredUserController::class, 'create'])->name('regi
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
 
-
-
 //
 
 Route::resource('messages', MessageController::class);
 
 
+//Programar Session
+Route::resource('sessions', SessionsController::class);
+
+Route::get('/sessions', [SessionsController::class, 'index'])->name('sessions.index');
+Route::get('/sessions/create', [SessionsController::class, 'create'])->name('sessions.create');
+Route::post('/sessions', [SessionsController::class, 'store'])->name('sessions.store');
+Route::get('/sessions/{session}', [SessionsController::class, 'show'])->name('sessions.show');
+Route::get('/sessions/{session}/edit', [SessionsController::class, 'edit'])->name('sessions.edit');
+Route::put('/sessions/{session}', [SessionsController::class, 'update'])->name('sessions.update');
+Route::delete('/sessions/{session}', [SessionsController::class, 'destroy'])->name('sessions.destroy');
 
 
 
