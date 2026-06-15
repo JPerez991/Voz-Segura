@@ -6,7 +6,7 @@
     }
     window.onload = toggleAnonimoField;
 
-    document.querySelector('form').addEventListener('submit', function(e) {
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
         e.preventDefault();
         var username = document.getElementById('nombre_usuario').value.trim();
         var email = document.getElementById('email').value.trim();
@@ -63,7 +63,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet"> <!-- Cambié esto -->
 
         <!-- Scripts -->
-        <link rel="preload" as="style" href="/build/assets/app-DD78o7v5.css" /><link rel="modulepreload" href="/build/assets/app-BdXKHCzr.js" /><link rel="stylesheet" href="/build/assets/app-DD78o7v5.css" /><script type="module" src="/build/assets/app-BdXKHCzr.js"></script>    </head>
+        <link rel="preload" as="style" href="/build/assets/app-D7aFDAjt.css" /><link rel="modulepreload" href="/build/assets/app-BdXKHCzr.js" /><link rel="stylesheet" href="/build/assets/app-D7aFDAjt.css" /><script type="module" src="/build/assets/app-BdXKHCzr.js"></script>    </head>
     <body  class="font-delius antialiased">
         <div class="min-h-screen bg-gray-100">
             <!DOCTYPE html>
@@ -211,7 +211,7 @@
             <main>
                     <!-- Session Status -->
 
-    <form method="POST" action="/register" class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto ">
+    <form id="registerForm" method="POST" action="/register" class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto ">
         <input type="hidden" name="_token" value="" autocomplete="off">
         <!-- Nombre de Usuario -->
         <div class="mb-4">

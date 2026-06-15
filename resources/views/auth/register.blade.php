@@ -3,7 +3,7 @@
 @section('content')
     <!-- Session Status -->
 
-    <form method="POST" action="{{ route('register') }}" class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto ">
+    <form id="registerForm" method="POST" action="{{ route('register') }}" class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto ">
         @csrf
 
         <!-- Nombre de Usuario -->
@@ -77,7 +77,7 @@
     }
     window.onload = toggleAnonimoField;
 
-    document.querySelector('form').addEventListener('submit', function(e) {
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
         e.preventDefault();
         var username = document.getElementById('nombre_usuario').value.trim();
         var email = document.getElementById('email').value.trim();

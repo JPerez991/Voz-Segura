@@ -48,7 +48,7 @@
     <div class="form-container">
         <h1 class="text-2xl font-bold text-center mb-6">Iniciar Sesión</h1>
 
-        <form method="POST" action="{{ route('login') }}">
+        <form id="loginForm" method="POST" action="{{ route('login') }}">
             @csrf
 
             <div class="mb-4">
@@ -82,7 +82,7 @@
     }
 })();
 
-document.querySelector('form').addEventListener('submit', function(e) {
+document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     var username = document.getElementById('nombre_usuario').value.trim();
     var password = document.getElementById('contraseña').value;
