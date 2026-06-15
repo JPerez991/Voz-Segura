@@ -13,7 +13,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet"> <!-- Cambié esto -->
 
         <!-- Scripts -->
-        <link rel="preload" as="style" href="/build/assets/app-B1ZHEufn.css" /><link rel="modulepreload" href="/build/assets/app-BdXKHCzr.js" /><link rel="stylesheet" href="/build/assets/app-B1ZHEufn.css" /><script type="module" src="/build/assets/app-BdXKHCzr.js"></script>    </head>
+        <link rel="preload" as="style" href="/build/assets/app-DD78o7v5.css" /><link rel="modulepreload" href="/build/assets/app-BdXKHCzr.js" /><link rel="stylesheet" href="/build/assets/app-DD78o7v5.css" /><script type="module" src="/build/assets/app-BdXKHCzr.js"></script>    </head>
     <body  class="font-delius antialiased">
         <div class="min-h-screen bg-gray-100">
             <!DOCTYPE html>
@@ -71,7 +71,7 @@
                     <div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
     <div @click="open = ! open">
         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-purple-600 bg-white hover:text-purple-700 focus:outline-none transition ease-in-out duration-150">
-                                <div>Maria_G</div>
+                                <div id="nav-username">Maria_G</div>
 
                                 <div class="ms-1">
                                     <svg class="fill-current h-4 w-4 text-purple-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -159,76 +159,133 @@
             
             <!-- Page Content -->
             <main>
-                <section class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+                <section class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
     <header>
         <h2 class="text-2xl font-semibold text-purple-700">
-            Profile Information
+            Editar Perfil
         </h2>
+        <p class="mt-1 text-sm text-gray-600">
+            Actualizá la información de tu cuenta.
+        </p>
     </header>
 
-    <form method="post" action="/profile" class="mt-6 space-y-6">
-        <input type="hidden" name="_token" value="" autocomplete="off">        <input type="hidden" name="_method" value="patch">
-        <!-- Nombre Completo -->
+    <form id="profileForm" class="mt-6 space-y-6">
         <div>
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="nombre_completo">
-    Full Name
-</label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" id="nombre_completo" name="nombre_completo" type="text" value="Maria García López" required="required" autofocus="autofocus">
-                    </div>
-
-        <!-- Descripción -->
-        <div>
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="descripcion">
-    Description
-</label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" id="descripcion" name="descripcion" type="text" value="Soy una mujer de 28 años en busca de apoyo emocional. Me gusta la lectura y la jardinería." required="required">
-                    </div>
-
-                    <div>
-                <label class="block font-medium text-sm text-gray-700 text-purple-600" for="nombre_anonimo">
-    Anonymous Name
-</label>
-                <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" id="nombre_anonimo" name="nombre_anonimo" type="text" value="Mariposa">
-                            </div>
-        
-        <div>
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="email">
-    Correo Electrónico
-</label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" id="email" name="email" type="email" value="maria@ejemplo.com" required="required">
-                    </div>
+            <label for="nombre_completo" class="block text-sm font-medium text-purple-600">Nombre Completo</label>
+            <input id="nombre_completo" name="nombre_completo" type="text" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required />
+        </div>
 
         <div>
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="password">
-    Contraseña
-</label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" id="password" name="password" type="password" autocomplete="new-password">
-                    </div>
+            <label for="descripcion" class="block text-sm font-medium text-purple-600">Descripción</label>
+            <input id="descripcion" name="descripcion" type="text" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required />
+        </div>
+
+        <div id="anonimo-field">
+            <label for="nombre_anonimo" class="block text-sm font-medium text-purple-600">Nombre Anónimo</label>
+            <input id="nombre_anonimo" name="nombre_anonimo" type="text" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
+        </div>
 
         <div>
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="password_confirmation">
-    Confirmar Contraseña
-</label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password">
-                    </div>
+            <label for="email" class="block text-sm font-medium text-purple-600">Correo Electrónico</label>
+            <input id="email" name="email" type="email" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required />
+        </div>
+
+        <div>
+            <label for="password" class="block text-sm font-medium text-purple-600">Contraseña</label>
+            <input id="password" name="password" type="password" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" autocomplete="new-password" />
+        </div>
+
+        <div>
+            <label for="password_confirmation" class="block text-sm font-medium text-purple-600">Confirmar Contraseña</label>
+            <input id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" autocomplete="new-password" />
+        </div>
 
         <div class="flex items-center gap-4">
-            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 bg-purple-600 hover:bg-purple-700 text-white">
-    Save
-</button>
-
-                    </div>
+            <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                Guardar
+            </button>
+            <span id="savedMsg" class="text-sm text-green-600 hidden">Guardado.</span>
+        </div>
     </form>
 </section>
+
+<script>
+(function() {
+    var user = JSON.parse(localStorage.getItem('voz_currentUser') || 'null');
+    if (!user) return;
+
+    document.getElementById('nombre_completo').value = user.nombre_completo || '';
+    document.getElementById('descripcion').value = user.descripcion || '';
+    document.getElementById('nombre_anonimo').value = user.nombre_anonimo || '';
+    document.getElementById('email').value = user.email || '';
+
+    if (user.rol !== 'usuaria') {
+        document.getElementById('anonimo-field').style.display = 'none';
+    }
+
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var users = JSON.parse(localStorage.getItem('voz_users') || '[]');
+        var idx = users.findIndex(function(u) { return u.id === user.id; });
+        if (idx === -1) return;
+
+        var pass = document.getElementById('password').value;
+        var passConf = document.getElementById('password_confirmation').value;
+        if (pass && pass !== passConf) {
+            alert('Las contraseñas no coinciden.');
+            return;
+        }
+
+        users[idx].nombre_completo = document.getElementById('nombre_completo').value.trim();
+        users[idx].descripcion = document.getElementById('descripcion').value.trim();
+        users[idx].nombre_anonimo = document.getElementById('nombre_anonimo').value.trim() || null;
+        users[idx].email = document.getElementById('email').value.trim();
+        if (pass) users[idx].password = pass;
+
+        localStorage.setItem('voz_users', JSON.stringify(users));
+        user = users[idx];
+        localStorage.setItem('voz_currentUser', JSON.stringify(user));
+
+        var msg = document.getElementById('savedMsg');
+        msg.classList.remove('hidden');
+        setTimeout(function() { msg.classList.add('hidden'); }, 2000);
+    });
+})();
+</script>
             </main>
         </div>
 <script>
 (function() {
-    var user = localStorage.getItem('voz_currentUser');
+    var raw = localStorage.getItem('voz_currentUser');
     var path = window.location.pathname;
     var publicPages = ['/', '/login', '/register', '/welcome2'];
-    if (!user && publicPages.indexOf(path) === -1) {
+
+    if (!raw && publicPages.indexOf(path) === -1) {
         window.location.href = '/login';
+        return;
+    }
+    if (!raw) return;
+
+    var user = JSON.parse(raw);
+
+    var navEl = document.getElementById('nav-username');
+    if (navEl) navEl.textContent = user.nombre_usuario || 'Usuario';
+
+    if (path === '/dashboard') {
+        var container = document.getElementById('profile-card-container');
+        if (container) {
+            var card = document.createElement('div');
+            card.className = 'bg-white rounded-lg shadow-md p-6 flex items-center space-x-4';
+            card.innerHTML = '<div class="w-16 h-16 rounded-full bg-purple-200 flex items-center justify-center text-2xl font-bold text-purple-700">' +
+                (user.nombre_completo ? user.nombre_completo.charAt(0) : user.nombre_usuario.charAt(0)) +
+                '</div>' +
+                '<div>' +
+                '<h2 class="text-xl font-semibold text-purple-900">' + (user.nombre_completo || user.nombre_usuario) + '</h2>' +
+                '<p class="text-sm text-purple-600">' + (user.rol === 'psicologa' ? 'Psicóloga' : 'Usuaria') + '</p>' +
+                '<p class="text-sm text-gray-500">' + (user.descripcion || '') + '</p>' +
+                '</div>';
+            container.appendChild(card);
+        }
     }
 })();
 </script>

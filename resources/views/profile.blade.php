@@ -1,116 +1,86 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Usuario</title>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-</head>
-<body>
-    @include('layouts.navigation') <!-- Incluye la navegación aquí -->
+@extends('layouts.app')
 
-    <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold">Bienvenido, {{ $user->name }}</h1>
-        <h2 class="text-xl">Perfil</h2>
+@section('content')
+<section class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
+    <header>
+        <h2 class="text-2xl font-semibold text-purple-700">
+            Perfil de Usuario
+        </h2>
+        <p class="mt-1 text-sm text-gray-600">
+            Actualizá la información de tu cuenta.
+        </p>
+    </header>
 
-        <section>
-            <header>
-                <h2 class="text-lg font-medium text-gray-900">
-                    {{ __('Profile Information') }}
-                </h2>
+    <form id="profileForm" class="mt-6 space-y-6">
+        <div>
+            <label for="nombre_usuario" class="block text-sm font-medium text-purple-600">Nombre de Usuario</label>
+            <input id="nombre_usuario" name="nombre_usuario" type="text" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required />
+        </div>
 
-                <p class="mt-1 text-sm text-gray-600">
-                    {{ __("Update your account's profile information and email address.") }}
-                </p>
-            </header>
+        <div>
+            <label for="email" class="block text-sm font-medium text-purple-600">Correo Electrónico</label>
+            <input id="email" name="email" type="email" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required />
+        </div>
 
-            <!-- Formulario para enviar la verificación de correo -->
-            <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-                @csrf
-            </form>
+        <div>
+            <label for="nombre_completo" class="block text-sm font-medium text-purple-600">Nombre Completo</label>
+            <input id="nombre_completo" name="nombre_completo" type="text" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
+        </div>
 
-            <!-- Formulario para actualizar el perfil -->
-            <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-                @csrf
-                @method('patch')
+        <div>
+            <label for="descripcion" class="block text-sm font-medium text-purple-600">Descripción</label>
+            <textarea id="descripcion" name="descripcion" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" rows="3"></textarea>
+        </div>
 
-                <!-- Campo Nombre -->
-                <div>
-                    <x-input-label for="name" :value="__('Name')" />
-                    <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-                    <x-input-error class="mt-2" :messages="$errors->get('name')" />
-                </div>
+        <div id="anonimo-field">
+            <label for="nombre_anonimo" class="block text-sm font-medium text-purple-600">Nombre Anónimo</label>
+            <input id="nombre_anonimo" name="nombre_anonimo" type="text" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
+        </div>
 
-                <!-- Campo Email -->
-                <div>
-                    <x-input-label for="email" :value="__('Email')" />
-                    <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-                    <x-input-error class="mt-2" :messages="$errors->get('email')" />
+        <div class="flex items-center gap-4">
+            <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                Guardar
+            </button>
+            <span id="savedMsg" class="text-sm text-green-600 hidden">Guardado.</span>
+        </div>
+    </form>
+</section>
 
-                    <!-- Verificación de correo electrónico -->
-                    @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
-                        <div>
-                            <p class="text-sm mt-2 text-gray-800">
-                                {{ __('Your email address is unverified.') }}
-
-                                <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    {{ __('Click here to re-send the verification email.') }}
-                                </button>
-                            </p>
-
-                            @if (session('status') === 'verification-link-sent')
-                                <p class="mt-2 font-medium text-sm text-green-600">
-                                    {{ __('A new verification link has been sent to your email address.') }}
-                                </p>
-                            @endif
-                        </div>
-                    @endif
-                </div>
-
-                <!-- Campo Nombre Completo -->
-                <div>
-                    <x-input-label for="nombre_completo" :value="__('Nombre Completo')" />
-                    <x-text-input id="nombre_completo" name="nombre_completo" type="text" class="mt-1 block w-full" :value="old('nombre_completo', $profile->nombre_completo)" />
-                    <x-input-error class="mt-2" :messages="$errors->get('nombre_completo')" />
-                </div>
-
-                <!-- Campo Descripción -->
-                <div>
-                    <x-input-label for="descripcion" :value="__('Descripción')" />
-                    <x-text-input id="descripcion" name="descripcion" type="text" class="mt-1 block w-full" :value="old('descripcion', $profile->descripcion)" />
-                    <x-input-error class="mt-2" :messages="$errors->get('descripcion')" />
-                </div>
-
-                <!-- Campo Nombre Anónimo -->
-                <div>
-                    <x-input-label for="nombre_anonimo" :value="__('Nombre Anónimo')" />
-                    <x-text-input id="nombre_anonimo" name="nombre_anonimo" type="text" class="mt-1 block w-full" :value="old('nombre_anonimo', $profile->nombre_anonimo)" />
-                    <x-input-error class="mt-2" :messages="$errors->get('nombre_anonimo')" />
-                </div>
-
-                <!-- Botón Guardar -->
-                <div class="flex items-center gap-4">
-                    <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-                    @if (session('status') === 'profile-updated')
-                        <p
-                            x-data="{ show: true }"
-                            x-show="show"
-                            x-transition
-                            x-init="setTimeout(() => show = false, 2000)"
-                            class="text-sm text-gray-600"
-                        >{{ __('Saved.') }}</p>
-                    @endif
-                </div>
-            </form>
-        </section>
-    </div>
 <script>
 (function() {
-    if (!localStorage.getItem('voz_currentUser')) {
-        window.location.href = '/login';
+    var user = JSON.parse(localStorage.getItem('voz_currentUser') || 'null');
+    if (!user) return;
+
+    document.getElementById('nombre_usuario').value = user.nombre_usuario || '';
+    document.getElementById('email').value = user.email || '';
+    document.getElementById('nombre_completo').value = user.nombre_completo || '';
+    document.getElementById('descripcion').value = user.descripcion || '';
+    document.getElementById('nombre_anonimo').value = user.nombre_anonimo || '';
+
+    if (user.rol !== 'usuaria') {
+        document.getElementById('anonimo-field').style.display = 'none';
     }
+
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var users = JSON.parse(localStorage.getItem('voz_users') || '[]');
+        var idx = users.findIndex(function(u) { return u.id === user.id; });
+        if (idx === -1) return;
+
+        users[idx].nombre_usuario = document.getElementById('nombre_usuario').value.trim();
+        users[idx].email = document.getElementById('email').value.trim();
+        users[idx].nombre_completo = document.getElementById('nombre_completo').value.trim();
+        users[idx].descripcion = document.getElementById('descripcion').value.trim();
+        users[idx].nombre_anonimo = document.getElementById('nombre_anonimo').value.trim() || null;
+
+        localStorage.setItem('voz_users', JSON.stringify(users));
+        user = users[idx];
+        localStorage.setItem('voz_currentUser', JSON.stringify(user));
+
+        var msg = document.getElementById('savedMsg');
+        msg.classList.remove('hidden');
+        setTimeout(function() { msg.classList.add('hidden'); }, 2000);
+    });
 })();
 </script>
-</body>
-</html>
+@endsection

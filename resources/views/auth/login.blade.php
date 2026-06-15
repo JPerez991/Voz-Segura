@@ -90,7 +90,7 @@ document.querySelector('form').addEventListener('submit', function(e) {
     var user = users.find(function(u) { return u.nombre_usuario === username && u.password === password; });
     if (user) {
         localStorage.setItem('voz_currentUser', JSON.stringify(user));
-        window.location.href = '/dashboard';
+        window.location.href = '/profile';
     } else {
         alert('Usuario o contraseña incorrectos.');
     }

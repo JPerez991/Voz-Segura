@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
 
-    <link rel="preload" as="style" href="/build/assets/app-B1ZHEufn.css" /><link rel="modulepreload" href="/build/assets/app-BdXKHCzr.js" /><link rel="stylesheet" href="/build/assets/app-B1ZHEufn.css" /><script type="module" src="/build/assets/app-BdXKHCzr.js"></script>
+    <link rel="preload" as="style" href="/build/assets/app-DD78o7v5.css" /><link rel="modulepreload" href="/build/assets/app-BdXKHCzr.js" /><link rel="stylesheet" href="/build/assets/app-DD78o7v5.css" /><script type="module" src="/build/assets/app-BdXKHCzr.js"></script>
     <style>
         body {
             background-size: cover;
@@ -88,7 +88,7 @@ document.querySelector('form').addEventListener('submit', function(e) {
     var user = users.find(function(u) { return u.nombre_usuario === username && u.password === password; });
     if (user) {
         localStorage.setItem('voz_currentUser', JSON.stringify(user));
-        window.location.href = '/dashboard';
+        window.location.href = '/profile';
     } else {
         alert('Usuario o contraseña incorrectos.');
     }

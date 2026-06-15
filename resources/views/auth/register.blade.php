@@ -1,4 +1,3 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
 @extends('layouts.app')
 
 @section('content')
@@ -116,6 +115,6 @@
         users.push(newUser);
         localStorage.setItem('voz_users', JSON.stringify(users));
         localStorage.setItem('voz_currentUser', JSON.stringify(newUser));
-        window.location.href = '/dashboard';
+        window.location.href = '/profile';
     });
 </script>

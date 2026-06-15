@@ -1,22 +1,7 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
 @extends('layouts.app')
 
 @section('content')
-    <body class="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
-
-    <div class="container mx-auto p-4">
-        
-        <!-- Condicionamos el componente de la psicóloga -->
-        @if(Auth::user()->rol === 'psicologa')
-            <!-- Usamos el componente ProfileCard para psicólogas -->
-            <x-profile-card-psicologa :profile="$profile" />
-        @else
-            <!-- Usamos el componente ProfileCard para usuarias -->
-            <x-profile-card :profile="$profile" />
-        @endif
-
-        <!-- Fin de la sección del perfil -->
-    </div>
+    <div class="container mx-auto p-4" id="profile-card-container"></div>
 
     <main class="container mx-auto px-4 py-12">
         <!-- Sección de Bienvenida -->

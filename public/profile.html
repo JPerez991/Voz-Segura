@@ -1,13 +1,22 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Usuario</title>
-    <link rel="stylesheet" href="/css/app.css">
-</head>
-<body>
-    <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="">
+
+        <title>VozSegura</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet"> <!-- Cambié esto -->
+
+        <!-- Scripts -->
+        <link rel="preload" as="style" href="/build/assets/app-DD78o7v5.css" /><link rel="modulepreload" href="/build/assets/app-BdXKHCzr.js" /><link rel="stylesheet" href="/build/assets/app-DD78o7v5.css" /><script type="module" src="/build/assets/app-BdXKHCzr.js"></script>    </head>
+    <body  class="font-delius antialiased">
+        <div class="min-h-screen bg-gray-100">
+            <!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -62,7 +71,7 @@
                     <div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
     <div @click="open = ! open">
         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-purple-600 bg-white hover:text-purple-700 focus:outline-none transition ease-in-out duration-150">
-                                <div>Maria_G</div>
+                                <div id="nav-username">Maria_G</div>
 
                                 <div class="ms-1">
                                     <svg class="fill-current h-4 w-4 text-purple-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -145,88 +154,130 @@
     </nav>
 </body>
 
-</html> <!-- Incluye la navegación aquí -->
+</html>
+            <!-- Page Heading -->
+            
+            <!-- Page Content -->
+            <main>
+                <section class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
+    <header>
+        <h2 class="text-2xl font-semibold text-purple-700">
+            Perfil de Usuario
+        </h2>
+        <p class="mt-1 text-sm text-gray-600">
+            Actualizá la información de tu cuenta.
+        </p>
+    </header>
 
-    <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold">Bienvenido, </h1>
-        <h2 class="text-xl">Perfil</h2>
+    <form id="profileForm" class="mt-6 space-y-6">
+        <div>
+            <label for="nombre_usuario" class="block text-sm font-medium text-purple-600">Nombre de Usuario</label>
+            <input id="nombre_usuario" name="nombre_usuario" type="text" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required />
+        </div>
 
-        <section>
-            <header>
-                <h2 class="text-lg font-medium text-gray-900">
-                    Profile Information
-                </h2>
+        <div>
+            <label for="email" class="block text-sm font-medium text-purple-600">Correo Electrónico</label>
+            <input id="email" name="email" type="email" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required />
+        </div>
 
-                <p class="mt-1 text-sm text-gray-600">
-                    Update your account&#039;s profile information and email address.
-                </p>
-            </header>
+        <div>
+            <label for="nombre_completo" class="block text-sm font-medium text-purple-600">Nombre Completo</label>
+            <input id="nombre_completo" name="nombre_completo" type="text" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
+        </div>
 
-            <!-- Formulario para enviar la verificación de correo -->
-            <form id="send-verification" method="post" action="/email/verification-notification">
-                <input type="hidden" name="_token" value="" autocomplete="off">            </form>
+        <div>
+            <label for="descripcion" class="block text-sm font-medium text-purple-600">Descripción</label>
+            <textarea id="descripcion" name="descripcion" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" rows="3"></textarea>
+        </div>
 
-            <!-- Formulario para actualizar el perfil -->
-            <form method="post" action="/profile" class="mt-6 space-y-6">
-                <input type="hidden" name="_token" value="" autocomplete="off">                <input type="hidden" name="_method" value="patch">
-                <!-- Campo Nombre -->
-                <div>
-                    <label class="block font-medium text-sm text-gray-700" for="name">
-    Name
-</label>
-                    <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" id="name" name="name" type="text" required="required" autofocus="autofocus" autocomplete="name">
-                                    </div>
+        <div id="anonimo-field">
+            <label for="nombre_anonimo" class="block text-sm font-medium text-purple-600">Nombre Anónimo</label>
+            <input id="nombre_anonimo" name="nombre_anonimo" type="text" class="mt-1 block w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
+        </div>
 
-                <!-- Campo Email -->
-                <div>
-                    <label class="block font-medium text-sm text-gray-700" for="email">
-    Email
-</label>
-                    <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" id="email" name="email" type="email" value="maria@ejemplo.com" required="required" autocomplete="username">
-                    
-                    <!-- Verificación de correo electrónico -->
-                                    </div>
+        <div class="flex items-center gap-4">
+            <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                Guardar
+            </button>
+            <span id="savedMsg" class="text-sm text-green-600 hidden">Guardado.</span>
+        </div>
+    </form>
+</section>
 
-                <!-- Campo Nombre Completo -->
-                <div>
-                    <label class="block font-medium text-sm text-gray-700" for="nombre_completo">
-    Nombre Completo
-</label>
-                    <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" id="nombre_completo" name="nombre_completo" type="text" value="Maria García López">
-                                    </div>
-
-                <!-- Campo Descripción -->
-                <div>
-                    <label class="block font-medium text-sm text-gray-700" for="descripcion">
-    Descripción
-</label>
-                    <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" id="descripcion" name="descripcion" type="text" value="Soy una mujer de 28 años en busca de apoyo emocional. Me gusta la lectura y la jardinería.">
-                                    </div>
-
-                <!-- Campo Nombre Anónimo -->
-                <div>
-                    <label class="block font-medium text-sm text-gray-700" for="nombre_anonimo">
-    Nombre Anónimo
-</label>
-                    <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" id="nombre_anonimo" name="nombre_anonimo" type="text" value="Mariposa">
-                                    </div>
-
-                <!-- Botón Guardar -->
-                <div class="flex items-center gap-4">
-                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-    Save
-</button>
-
-                                    </div>
-            </form>
-        </section>
-    </div>
 <script>
 (function() {
-    if (!localStorage.getItem('voz_currentUser')) {
+    var user = JSON.parse(localStorage.getItem('voz_currentUser') || 'null');
+    if (!user) return;
+
+    document.getElementById('nombre_usuario').value = user.nombre_usuario || '';
+    document.getElementById('email').value = user.email || '';
+    document.getElementById('nombre_completo').value = user.nombre_completo || '';
+    document.getElementById('descripcion').value = user.descripcion || '';
+    document.getElementById('nombre_anonimo').value = user.nombre_anonimo || '';
+
+    if (user.rol !== 'usuaria') {
+        document.getElementById('anonimo-field').style.display = 'none';
+    }
+
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var users = JSON.parse(localStorage.getItem('voz_users') || '[]');
+        var idx = users.findIndex(function(u) { return u.id === user.id; });
+        if (idx === -1) return;
+
+        users[idx].nombre_usuario = document.getElementById('nombre_usuario').value.trim();
+        users[idx].email = document.getElementById('email').value.trim();
+        users[idx].nombre_completo = document.getElementById('nombre_completo').value.trim();
+        users[idx].descripcion = document.getElementById('descripcion').value.trim();
+        users[idx].nombre_anonimo = document.getElementById('nombre_anonimo').value.trim() || null;
+
+        localStorage.setItem('voz_users', JSON.stringify(users));
+        user = users[idx];
+        localStorage.setItem('voz_currentUser', JSON.stringify(user));
+
+        var msg = document.getElementById('savedMsg');
+        msg.classList.remove('hidden');
+        setTimeout(function() { msg.classList.add('hidden'); }, 2000);
+    });
+})();
+</script>
+            </main>
+        </div>
+<script>
+(function() {
+    var raw = localStorage.getItem('voz_currentUser');
+    var path = window.location.pathname;
+    var publicPages = ['/', '/login', '/register', '/welcome2'];
+
+    if (!raw && publicPages.indexOf(path) === -1) {
         window.location.href = '/login';
+        return;
+    }
+    if (!raw) return;
+
+    var user = JSON.parse(raw);
+
+    var navEl = document.getElementById('nav-username');
+    if (navEl) navEl.textContent = user.nombre_usuario || 'Usuario';
+
+    if (path === '/dashboard') {
+        var container = document.getElementById('profile-card-container');
+        if (container) {
+            var card = document.createElement('div');
+            card.className = 'bg-white rounded-lg shadow-md p-6 flex items-center space-x-4';
+            card.innerHTML = '<div class="w-16 h-16 rounded-full bg-purple-200 flex items-center justify-center text-2xl font-bold text-purple-700">' +
+                (user.nombre_completo ? user.nombre_completo.charAt(0) : user.nombre_usuario.charAt(0)) +
+                '</div>' +
+                '<div>' +
+                '<h2 class="text-xl font-semibold text-purple-900">' + (user.nombre_completo || user.nombre_usuario) + '</h2>' +
+                '<p class="text-sm text-purple-600">' + (user.rol === 'psicologa' ? 'Psicóloga' : 'Usuaria') + '</p>' +
+                '<p class="text-sm text-gray-500">' + (user.descripcion || '') + '</p>' +
+                '</div>';
+            container.appendChild(card);
+        }
     }
 })();
 </script>
-</body>
+    </body>
 </html>
+
