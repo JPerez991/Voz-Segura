@@ -168,7 +168,16 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-    ])->toArray(),
+    ])->filter(function ($provider) {
+        return match (env('APP_ENV')) {
+            'production' => !in_array($provider, [
+                'NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider',
+                'Termwind\Laravel\TermwindServiceProvider',
+                'Spatie\LaravelIgnition\IgnitionServiceProvider',
+            ]),
+            default => true,
+        };
+    })->toArray(),
 
     /*
     |--------------------------------------------------------------------------
