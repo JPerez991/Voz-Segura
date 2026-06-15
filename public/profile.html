@@ -1,42 +1,13 @@
-<link rel="preload" as="style" href="/build/assets/app-DRL1rRwp.css" /><link rel="modulepreload" href="/build/assets/app-BdXKHCzr.js" /><link rel="stylesheet" href="/build/assets/app-DRL1rRwp.css" /><script type="module" src="/build/assets/app-BdXKHCzr.js"></script>
-
-
-<script>
-    // Mostrar/ocultar el campo de anonimato basado en el rol seleccionado
-    function toggleAnonimoField() {
-        const rol = document.getElementById('rol').value;
-        const anonimoField = document.getElementById('anonimo-field');
-
-        if (rol === 'usuaria') {
-            anonimoField.style.display = 'block';
-        } else {
-            anonimoField.style.display = 'none';
-        }
-    }
-
-    // Ejecutar la función al cargar la página para verificar la opción inicial
-    window.onload = toggleAnonimoField;
-</script>
-
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="">
-
-        <title>VozSegura</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet"> <!-- Cambié esto -->
-
-        <!-- Scripts -->
-        <link rel="preload" as="style" href="/build/assets/app-DRL1rRwp.css" /><link rel="modulepreload" href="/build/assets/app-BdXKHCzr.js" /><link rel="stylesheet" href="/build/assets/app-DRL1rRwp.css" /><script type="module" src="/build/assets/app-BdXKHCzr.js"></script>    </head>
-    <body  class="font-delius antialiased">
-        <div class="min-h-screen bg-gray-100">
-            <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+    <!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -174,84 +145,81 @@
     </nav>
 </body>
 
-</html>
-            <!-- Page Heading -->
-            
-            <!-- Page Content -->
-            <main>
-                    <!-- Session Status -->
+</html> <!-- Incluye la navegación aquí -->
 
-    <form method="POST" action="/register" class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto ">
-        <input type="hidden" name="_token" value="" autocomplete="off">
-        <!-- Nombre de Usuario -->
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="nombre_usuario">
-    Nombre de Usuario
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold">Bienvenido, </h1>
+        <h2 class="text-xl">Perfil</h2>
+
+        <section>
+            <header>
+                <h2 class="text-lg font-medium text-gray-900">
+                    Profile Information
+                </h2>
+
+                <p class="mt-1 text-sm text-gray-600">
+                    Update your account&#039;s profile information and email address.
+                </p>
+            </header>
+
+            <!-- Formulario para enviar la verificación de correo -->
+            <form id="send-verification" method="post" action="/email/verification-notification">
+                <input type="hidden" name="_token" value="" autocomplete="off">            </form>
+
+            <!-- Formulario para actualizar el perfil -->
+            <form method="post" action="/profile" class="mt-6 space-y-6">
+                <input type="hidden" name="_token" value="" autocomplete="off">                <input type="hidden" name="_method" value="patch">
+                <!-- Campo Nombre -->
+                <div>
+                    <label class="block font-medium text-sm text-gray-700" for="name">
+    Name
 </label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full border-2 border-gray-300 rounded-md p-2" id="nombre_usuario" type="text" name="nombre_usuario" required="required" autofocus="autofocus">
-                    </div>
+                    <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" id="name" name="name" type="text" required="required" autofocus="autofocus" autocomplete="name">
+                                    </div>
 
-        <!-- Correo Electrónico -->
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="email">
-    Correo Electrónico
+                <!-- Campo Email -->
+                <div>
+                    <label class="block font-medium text-sm text-gray-700" for="email">
+    Email
 </label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full border-2 border-gray-300 rounded-md p-2" id="email" type="email" name="email" required="required">
-                    </div>
+                    <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" id="email" name="email" type="email" value="maria@ejemplo.com" required="required" autocomplete="username">
+                    
+                    <!-- Verificación de correo electrónico -->
+                                    </div>
 
-        <!-- Contraseña -->
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="password">
-    Contraseña
+                <!-- Campo Nombre Completo -->
+                <div>
+                    <label class="block font-medium text-sm text-gray-700" for="nombre_completo">
+    Nombre Completo
 </label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full border-2 border-gray-300 rounded-md p-2" id="password" type="password" name="password" required="required">
-                    </div>
+                    <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" id="nombre_completo" name="nombre_completo" type="text" value="Maria García López">
+                                    </div>
 
-        <!-- Confirmar Contraseña -->
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="password_confirmation">
-    Confirmar Contraseña
+                <!-- Campo Descripción -->
+                <div>
+                    <label class="block font-medium text-sm text-gray-700" for="descripcion">
+    Descripción
 </label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full border-2 border-gray-300 rounded-md p-2" id="password_confirmation" type="password" name="password_confirmation" required="required">
-                    </div>
+                    <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" id="descripcion" name="descripcion" type="text" value="Soy una mujer de 28 años en busca de apoyo emocional. Me gusta la lectura y la jardinería.">
+                                    </div>
 
-        <!-- Rol -->
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="rol">
-    Rol
+                <!-- Campo Nombre Anónimo -->
+                <div>
+                    <label class="block font-medium text-sm text-gray-700" for="nombre_anonimo">
+    Nombre Anónimo
 </label>
-            <select id="rol" name="rol" class="block mt-1 w-full border-2 border-gray-300 rounded-md p-2" required onchange="toggleAnonimoField()">
-                <option value="usuaria">Usuaria</option>
-                <option value="psicóloga">Psicóloga</option>
-             <!--   <option value="admin">Admin</option> -->
-            </select>
-                    </div>
+                    <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" id="nombre_anonimo" name="nombre_anonimo" type="text" value="Mariposa">
+                                    </div>
 
-        <!-- Anonimato (solo para Usuaria) -->
-        <div class="mb-4" id="anonimo-field" style="display: none;">
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="es_anonimo">
-    Desea ser anónimo?
-</label>
-            <select id="es_anonimo" name="es_anonimo" class="block mt-1 w-full border-2 border-gray-300 rounded-md p-2">
-                <option value="0">No</option>
-                <option value="1">Sí</option>
-            </select>
-                    </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-purple-600 hover:text-purple-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" href="/login">
-                Ya estás registrado?
-            </a>
-
-            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ml-3 bg-purple-600 text-white hover:bg-purple-700 focus:ring-2 focus:ring-yellow-500">
-    Registrarse
+                <!-- Botón Guardar -->
+                <div class="flex items-center gap-4">
+                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+    Save
 </button>
-        </div>
-    </form>
+
+                                    </div>
+            </form>
+        </section>
     </div>
-
-                </main>
-        </div>
-    </body>
+</body>
 </html>
-

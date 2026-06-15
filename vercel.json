@@ -7,8 +7,18 @@
     { "src": "/css/(.*)", "dest": "/css/$1" },
     { "src": "/js/(.*)", "dest": "/js/$1" },
     { "src": "/favicon.ico", "dest": "/favicon.ico" },
+    { "src": "/mix-manifest.json", "dest": "/mix-manifest.json" },
     { "src": "/login", "dest": "/login.html" },
     { "src": "/register", "dest": "/register.html" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/dashboard", "dest": "/dashboard.html" },
+    { "src": "/forums/create", "dest": "/forums/create.html" },
+    { "src": "/forums/(.*)", "dest": "/forums/$1.html" },
+    { "src": "/sessions/create", "dest": "/sessions/create.html" },
+    { "src": "/sessions", "dest": "/sessions.html" },
+    { "src": "/profile/edit", "dest": "/profile/edit.html" },
+    { "src": "/profile", "dest": "/profile.html" },
+    { "src": "/messages/(.*)", "dest": "/messages/$1.html" },
+    { "src": "/chat/(.*)", "dest": "/chat/$1.html" },
+    { "src": "/", "dest": "/index.html" }
   ]
 }

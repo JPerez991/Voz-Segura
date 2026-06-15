@@ -1,23 +1,3 @@
-<link rel="preload" as="style" href="/build/assets/app-DRL1rRwp.css" /><link rel="modulepreload" href="/build/assets/app-BdXKHCzr.js" /><link rel="stylesheet" href="/build/assets/app-DRL1rRwp.css" /><script type="module" src="/build/assets/app-BdXKHCzr.js"></script>
-
-
-<script>
-    // Mostrar/ocultar el campo de anonimato basado en el rol seleccionado
-    function toggleAnonimoField() {
-        const rol = document.getElementById('rol').value;
-        const anonimoField = document.getElementById('anonimo-field');
-
-        if (rol === 'usuaria') {
-            anonimoField.style.display = 'block';
-        } else {
-            anonimoField.style.display = 'none';
-        }
-    }
-
-    // Ejecutar la función al cargar la página para verificar la opción inicial
-    window.onload = toggleAnonimoField;
-</script>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -179,78 +159,38 @@
             
             <!-- Page Content -->
             <main>
-                    <!-- Session Status -->
-
-    <form method="POST" action="/register" class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto ">
-        <input type="hidden" name="_token" value="" autocomplete="off">
-        <!-- Nombre de Usuario -->
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="nombre_usuario">
-    Nombre de Usuario
-</label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full border-2 border-gray-300 rounded-md p-2" id="nombre_usuario" type="text" name="nombre_usuario" required="required" autofocus="autofocus">
-                    </div>
-
-        <!-- Correo Electrónico -->
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="email">
-    Correo Electrónico
-</label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full border-2 border-gray-300 rounded-md p-2" id="email" type="email" name="email" required="required">
-                    </div>
-
-        <!-- Contraseña -->
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="password">
-    Contraseña
-</label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full border-2 border-gray-300 rounded-md p-2" id="password" type="password" name="password" required="required">
-                    </div>
-
-        <!-- Confirmar Contraseña -->
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="password_confirmation">
-    Confirmar Contraseña
-</label>
-            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full border-2 border-gray-300 rounded-md p-2" id="password_confirmation" type="password" name="password_confirmation" required="required">
-                    </div>
-
-        <!-- Rol -->
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="rol">
-    Rol
-</label>
-            <select id="rol" name="rol" class="block mt-1 w-full border-2 border-gray-300 rounded-md p-2" required onchange="toggleAnonimoField()">
-                <option value="usuaria">Usuaria</option>
-                <option value="psicóloga">Psicóloga</option>
-             <!--   <option value="admin">Admin</option> -->
-            </select>
-                    </div>
-
-        <!-- Anonimato (solo para Usuaria) -->
-        <div class="mb-4" id="anonimo-field" style="display: none;">
-            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="es_anonimo">
-    Desea ser anónimo?
-</label>
-            <select id="es_anonimo" name="es_anonimo" class="block mt-1 w-full border-2 border-gray-300 rounded-md p-2">
-                <option value="0">No</option>
-                <option value="1">Sí</option>
-            </select>
-                    </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-purple-600 hover:text-purple-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" href="/login">
-                Ya estás registrado?
-            </a>
-
-            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ml-3 bg-purple-600 text-white hover:bg-purple-700 focus:ring-2 focus:ring-yellow-500">
-    Registrarse
-</button>
-        </div>
-    </form>
+                    <div class="container mx-auto my-6 p-6 bg-white shadow-lg rounded-lg">
+        <h1 class="text-2xl font-bold text-gray-700 mb-4">Programar Sesión</h1>
+        <form action="/sessions" method="POST">
+            <input type="hidden" name="_token" value="" autocomplete="off">            <div class="mb-4">
+                <label for="psicologa_id" class="block text-gray-700">Psicóloga</label>
+                <select class="form-control block w-full mt-1 p-2 border border-gray-300 rounded-lg" id="psicologa_id" name="psicologa_id" required>
+                                            <option value="2">Lic_Carmen</option>
+                                    </select>
+            </div>
+            <div class="mb-4">
+                <label for="usuario_id" class="block text-gray-700">Usuario</label>
+                <select class="form-control block w-full mt-1 p-2 border border-gray-300 rounded-lg" id="usuario_id" name="usuario_id" required>
+                                            <option value="1">Maria_G</option>
+                                            <option value="3">Ana_98</option>
+                                    </select>
+            </div>
+            <div class="mb-4">
+                <label for="tipo_sesion" class="block text-gray-700">Tipo de Sesión</label>
+                <input type="text" class="block w-full mt-1 p-2 border border-gray-300 rounded-lg" id="tipo_sesion" name="tipo_sesion" required>
+            </div>
+            <div class="mb-4">
+                <label for="descripcion" class="block text-gray-700">Descripción</label>
+                <textarea class="block w-full mt-1 p-2 border border-gray-300 rounded-lg" id="descripcion" name="descripcion"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="fecha_hora" class="block text-gray-700">Fecha y Hora</label>
+                <input type="datetime-local" class="block w-full mt-1 p-2 border border-gray-300 rounded-lg" id="fecha_hora" name="fecha_hora" required>
+            </div>
+            <button type="submit" class="btn btn-primary inline-block px-6 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg">Programar Sesión</button>
+        </form>
     </div>
-
-                </main>
+            </main>
         </div>
     </body>
 </html>

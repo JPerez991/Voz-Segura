@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat en Vivo</title>
+    <style>
+        /* Estilo para la ventana de chat */
+        #chat-window {
+            border: 1px solid #ccc;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            background-color: #f7fafc; /* Fondo claro */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo para cada mensaje */
+        #chat-window p {
+            margin: 10px 0;
+            font-size: 16px;
+            padding: 8px;
+            background-color: #fff; /* Fondo de mensaje */
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #chat-window strong {
+            color: #4A5568; /* Color de texto para el usuario */
+            font-weight: 600;
+        }
+
+        /* Estilo para el formulario de chat */
+        #chat-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Estilo para el área de texto */
+        #mensaje {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+            background-color: #ffffff;
+        }
+
+        /* Estilo para el checkbox de anonimato */
+        #es_anonimo {
+            margin-right: 8px;
+        }
+
+        /* Estilo para el botón de enviar */
+        button[type="submit"] {
+            width: 100%;
+            background-color: #7b61ff; /* Color malva oscuro */
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #6a52e8; /* Color más oscuro al pasar */
+        }
+
+        /* Estilo del contenedor de opciones */
+        #anonimo-option {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Adaptación para pantallas pequeñas */
+        @media (max-width: 600px) {
+            #chat-window {
+                height: 300px;
+            }
+
+            #mensaje {
+                height: 60px;
+            }
+
+            button[type="submit"] {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ventana de chat -->
+    <div id="chat-window" data-recipient-id="2">
+            <p>
+            <strong>Lic_Carmen:</strong>
+            <span>Hola Maria, te recuerdo que tenemos sesión el jueves a las 4pm. ¡Te espero!</span>
+        </p>
+            <p>
+            <strong>Maria_G:</strong>
+            <span>Gracias Carmen, confirmo asistencia. Estuve practicando los ejercicios de respiración y me han ayudado mucho.</span>
+        </p>
+            <p>
+            <strong>Lic_Carmen:</strong>
+            <span>Me alegra mucho escuchar eso! La práctica constante es clave. Podemos revisar tu progreso el jueves.</span>
+        </p>
+    </div>
+
+<form id="chat-form">
+    <textarea name="mensaje" id="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+    
+    <div id="anonimo-option">
+        <input type="checkbox" name="es_anonimo" id="es_anonimo">
+        <label for="es_anonimo">Enviar como anónimo</label>
+    </div>
+
+    <button type="submit">Enviar</button>
+</form>
+
+<script src="/js/app.js"></script>
+
+<script>
+
+   // Recupera el recipientId desde el div que tiene el atributo data-recipient-id
+const recipientId = document.getElementById('chat-window').getAttribute('data-recipient-id');
+
+// Utiliza recipientId para configurar Echo y el resto del código
+Echo.private(`chat.${recipientId}`)
+    .listen('MessageSent', (e) => {
+        document.getElementById('chat-window').innerHTML += 
+            `<p><strong>${e.message.es_anonimo ? 'Anónimo' : e.message.userEnvia.nombre_usuario}:</strong> ${e.message.mensaje}</p>`;
+    });
+
+document.getElementById('chat-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const mensaje = document.getElementById('mensaje').value;
+    const esAnonimo = document.getElementById('es_anonimo').checked;
+
+    fetch(`/chat/${recipientId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '' },
+        body: JSON.stringify({ mensaje: mensaje, es_anonimo: esAnonimo })
+    }).then(response => response.json())
+      .then(data => {
+          document.getElementById('mensaje').value = '';
+      });
+});
+
+</script>
+
+</body>
+</html>
