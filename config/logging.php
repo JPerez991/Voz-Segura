@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'default' => env('LOG_CHANNEL', env('VERCEL_ENV') ? 'stderr' : 'stack'),
+    'default' => env('LOG_CHANNEL', 'errorlog'),
 
     /*
     |--------------------------------------------------------------------------
@@ -124,7 +124,8 @@ return [
         ],
 
         'emergency' => [
-            'path' => storage_path('logs/laravel.log'),
+            'driver' => 'errorlog',
+            'level' => 'debug',
         ],
     ],
 
