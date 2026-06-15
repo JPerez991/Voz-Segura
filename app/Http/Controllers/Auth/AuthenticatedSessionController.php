@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerate();
 
             // Redirigir a la ruta de destino (profile)
-            return redirect()->route('profile.edit');
+            return redirect()->route('dashboard');
         }
 
         // Si la autenticación falla, redirigir de nuevo con un mensaje de error
