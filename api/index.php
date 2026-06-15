@@ -16,6 +16,12 @@ $_ENV['LOG_CHANNEL'] = 'errorlog';
 putenv('APP_ENV=' . $_ENV['APP_ENV']);
 putenv('APP_DEBUG=' . $_ENV['APP_DEBUG']);
 putenv('LOG_CHANNEL=errorlog');
+$_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
+putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
+$viewPath = '/tmp/storage/framework/views';
+if (!is_dir($viewPath)) {
+    mkdir($viewPath, 0777, true);
+}
 
 require __DIR__.'/../vendor/autoload.php';
 
