@@ -71,18 +71,51 @@
     @endsection
 
 <script>
-    // Mostrar/ocultar el campo de anonimato basado en el rol seleccionado
     function toggleAnonimoField() {
-        const rol = document.getElementById('rol').value;
-        const anonimoField = document.getElementById('anonimo-field');
-
-        if (rol === 'usuaria') {
-            anonimoField.style.display = 'block';
-        } else {
-            anonimoField.style.display = 'none';
-        }
+        var rol = document.getElementById('rol').value;
+        var anonimoField = document.getElementById('anonimo-field');
+        anonimoField.style.display = rol === 'usuaria' ? 'block' : 'none';
     }
-
-    // Ejecutar la función al cargar la página para verificar la opción inicial
     window.onload = toggleAnonimoField;
+
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var username = document.getElementById('nombre_usuario').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value;
+        var passwordConf = document.getElementById('password_confirmation').value;
+        var rol = document.getElementById('rol').value;
+        var esAnonimo = document.getElementById('es_anonimo') ? document.getElementById('es_anonimo').value : '0';
+
+        if (password !== passwordConf) {
+            alert('Las contraseñas no coinciden.');
+            return;
+        }
+        if (username.length < 3) {
+            alert('El nombre de usuario debe tener al menos 3 caracteres.');
+            return;
+        }
+
+        var users = JSON.parse(localStorage.getItem('voz_users') || '[]');
+        if (users.some(function(u) { return u.nombre_usuario === username; })) {
+            alert('El nombre de usuario ya existe.');
+            return;
+        }
+
+        var newUser = {
+            id: users.length + 1,
+            nombre_usuario: username,
+            email: email,
+            password: password,
+            rol: rol === 'psicóloga' ? 'psicologa' : 'usuaria',
+            es_anonimo: parseInt(esAnonimo),
+            nombre_completo: '',
+            descripcion: '',
+            nombre_anonimo: esAnonimo === '1' ? 'Anónima' : null
+        };
+        users.push(newUser);
+        localStorage.setItem('voz_users', JSON.stringify(users));
+        localStorage.setItem('voz_currentUser', JSON.stringify(newUser));
+        window.location.href = '/dashboard';
+    });
 </script>

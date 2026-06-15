@@ -70,6 +70,33 @@
         </form>
     </div>
 
+<script>
+(function() {
+    if (!localStorage.getItem('voz_users')) {
+        const users = [
+            { id: 1, nombre_usuario: 'Maria_G', email: 'maria@ejemplo.com', password: 'password', rol: 'usuaria', nombre_completo: 'Maria García López', descripcion: 'Mujer en busca de apoyo emocional', nombre_anonimo: 'Mariposa' },
+            { id: 2, nombre_usuario: 'Lic_Carmen', email: 'carmen@psicologa.com', password: 'password', rol: 'psicologa', nombre_completo: 'Dra. Carmen Martínez', descripcion: 'Psicóloga clínica', nombre_anonimo: null },
+            { id: 3, nombre_usuario: 'Ana_98', email: 'ana@ejemplo.com', password: 'password', rol: 'usuaria', nombre_completo: 'Ana Rodríguez Pérez', descripcion: 'Madre de dos hijos', nombre_anonimo: 'Estrella' }
+        ];
+        localStorage.setItem('voz_users', JSON.stringify(users));
+    }
+})();
+
+document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var username = document.getElementById('nombre_usuario').value.trim();
+    var password = document.getElementById('contraseña').value;
+    var users = JSON.parse(localStorage.getItem('voz_users') || '[]');
+    var user = users.find(function(u) { return u.nombre_usuario === username && u.password === password; });
+    if (user) {
+        localStorage.setItem('voz_currentUser', JSON.stringify(user));
+        window.location.href = '/dashboard';
+    } else {
+        alert('Usuario o contraseña incorrectos.');
+    }
+});
+</script>
+
 </body>
 
 </html>

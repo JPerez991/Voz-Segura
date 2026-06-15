@@ -33,6 +33,16 @@
                 @yield('content')
             </main>
         </div>
+<script>
+(function() {
+    var user = localStorage.getItem('voz_currentUser');
+    var path = window.location.pathname;
+    var publicPages = ['/', '/login', '/register', '/welcome2'];
+    if (!user && publicPages.indexOf(path) === -1) {
+        window.location.href = '/login';
+    }
+})();
+</script>
     </body>
 </html>
 

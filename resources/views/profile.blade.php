@@ -105,5 +105,12 @@
             </form>
         </section>
     </div>
+<script>
+(function() {
+    if (!localStorage.getItem('voz_currentUser')) {
+        window.location.href = '/login';
+    }
+})();
+</script>
 </body>
 </html>
