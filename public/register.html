@@ -1,0 +1,247 @@
+<link rel="preload" as="style" href="/build/assets/app-37HOo-AK.css" /><link rel="modulepreload" href="/build/assets/app-BdXKHCzr.js" /><link rel="stylesheet" href="/build/assets/app-37HOo-AK.css" /><script type="module" src="/build/assets/app-BdXKHCzr.js"></script>
+
+
+<script>
+    // Mostrar/ocultar el campo de anonimato basado en el rol seleccionado
+    function toggleAnonimoField() {
+        const rol = document.getElementById('rol').value;
+        const anonimoField = document.getElementById('anonimo-field');
+
+        if (rol === 'usuaria') {
+            anonimoField.style.display = 'block';
+        } else {
+            anonimoField.style.display = 'none';
+        }
+    }
+
+    // Ejecutar la función al cargar la página para verificar la opción inicial
+    window.onload = toggleAnonimoField;
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="">
+
+        <title>VozSegura</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet"> <!-- Cambié esto -->
+
+        <!-- Scripts -->
+        <link rel="preload" as="style" href="/build/assets/app-37HOo-AK.css" /><link rel="modulepreload" href="/build/assets/app-BdXKHCzr.js" /><link rel="stylesheet" href="/build/assets/app-37HOo-AK.css" /><script type="module" src="/build/assets/app-BdXKHCzr.js"></script>    </head>
+    <body  class="font-delius antialiased">
+        <div class="min-h-screen bg-gray-100">
+            <!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente de Google Fonts -->
+    <link rel="stylesheet" href="ruta/a/tu/estilo.css"> <!-- Cambia esto por la ruta a tu archivo CSS -->
+    <title>Título de tu aplicación</title>
+    <style>
+        /* Estilo global para cambiar la fuente */
+        body {
+            font-family: 'Roboto', sans-serif;
+            /* Cambia 'Roboto' por la fuente que desees */
+        }
+
+        .nav-link,
+        .dropdown-link,
+        .responsive-nav-link {
+            font-family: 'Roboto', sans-serif;
+            /* Cambia 'Roboto' por la fuente que desees */
+        }
+    </style>
+</head>
+
+<body>
+    <nav x-data="{ open: false }" class="bg-purple-50 border-b border-gray-100">
+        <!-- Primary Navigation Menu -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <!-- Logo -->
+                    <div class="shrink-0 flex items-center space-x-2">
+                        <a href="/dashboard" class="flex items-center">
+                            <!-- resources/views/components/logo-heart.blade.php -->
+<!-- resources/views/components/logo-heart.blade.php -->
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-heart" viewBox="0 0 24 24" width="50" height="50" fill="none" stroke="#AD49E1" stroke-width="2">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+</svg>
+ <!-- Logo -->
+                            <span class="text-2xl font-bold text-purple-800">Voz Segura</span> <!-- Texto -->
+                        </a>
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    
+                    </div>
+                </div>
+
+                <!-- Settings Dropdown -->
+                <div class="hidden sm:flex sm:items-center sm:ms-6">
+                    <div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+    <div @click="open = ! open">
+        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-purple-600 bg-white hover:text-purple-700 focus:outline-none transition ease-in-out duration-150">
+                                <div>Invitado</div>
+
+                                <div class="ms-1">
+                                    <svg class="fill-current h-4 w-4 text-purple-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+    </div>
+
+    <div x-show="open"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 scale-95"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-95"
+            class="absolute z-50 mt-2 w-48 rounded-md shadow-lg ltr:origin-top-right rtl:origin-top-left end-0"
+            style="display: none;"
+            @click="open = false">
+        <div class="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white">
+            <!-- <a class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out text-purple-800" href="/login" >Login</a> -->
+<a class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out text-purple-800" onclick="openModal()" href="/login">
+    Login
+</a>
+                            <!-- <a class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out text-purple-800" href="/register" >Register</a> -->
+<a class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out text-purple-800" onclick="openModal()" href="/register">
+    Register
+</a>
+        </div>
+    </div>
+</div>
+                </div>
+
+                <!-- Hamburger -->
+                <div class="-me-2 flex items-center sm:hidden">
+                    <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-purple-400 hover:text-purple-500 hover:bg-purple-100 focus:outline-none focus:bg-purple-100 focus:text-purple-500 transition duration-150 ease-in-out">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Responsive Navigation Menu -->
+        <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+            <div class="pt-2 pb-3 space-y-1">
+                <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out text-purple-800" href="/dashboard">
+    Dashboard
+</a>
+            </div>
+
+            <!-- Responsive Settings Options -->
+            <div class="pt-4 pb-1 border-t border-gray-200">
+                <div class="px-4">
+                                        <div class="font-medium text-base text-purple-800">Invitado</div>
+                                    </div>
+
+                <div class="mt-3 space-y-1">
+                                        <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out text-purple-800" href="/login">
+    Login
+</a>
+                    <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out text-purple-800" href="/register">
+    Register
+</a>
+                                    </div>
+            </div>
+        </div>
+    </nav>
+</body>
+
+</html>
+            <!-- Page Heading -->
+            
+            <!-- Page Content -->
+            <main>
+                    <!-- Session Status -->
+
+    <form method="POST" action="/register" class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto ">
+        <input type="hidden" name="_token" value="" autocomplete="off">
+        <!-- Nombre de Usuario -->
+        <div class="mb-4">
+            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="nombre_usuario">
+    Nombre de Usuario
+</label>
+            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full border-2 border-gray-300 rounded-md p-2" id="nombre_usuario" type="text" name="nombre_usuario" required="required" autofocus="autofocus">
+                    </div>
+
+        <!-- Correo Electrónico -->
+        <div class="mb-4">
+            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="email">
+    Correo Electrónico
+</label>
+            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full border-2 border-gray-300 rounded-md p-2" id="email" type="email" name="email" required="required">
+                    </div>
+
+        <!-- Contraseña -->
+        <div class="mb-4">
+            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="password">
+    Contraseña
+</label>
+            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full border-2 border-gray-300 rounded-md p-2" id="password" type="password" name="password" required="required">
+                    </div>
+
+        <!-- Confirmar Contraseña -->
+        <div class="mb-4">
+            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="password_confirmation">
+    Confirmar Contraseña
+</label>
+            <input  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full border-2 border-gray-300 rounded-md p-2" id="password_confirmation" type="password" name="password_confirmation" required="required">
+                    </div>
+
+        <!-- Rol -->
+        <div class="mb-4">
+            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="rol">
+    Rol
+</label>
+            <select id="rol" name="rol" class="block mt-1 w-full border-2 border-gray-300 rounded-md p-2" required onchange="toggleAnonimoField()">
+                <option value="usuaria">Usuaria</option>
+                <option value="psicóloga">Psicóloga</option>
+             <!--   <option value="admin">Admin</option> -->
+            </select>
+                    </div>
+
+        <!-- Anonimato (solo para Usuaria) -->
+        <div class="mb-4" id="anonimo-field" style="display: none;">
+            <label class="block font-medium text-sm text-gray-700 text-purple-600" for="es_anonimo">
+    Desea ser anónimo?
+</label>
+            <select id="es_anonimo" name="es_anonimo" class="block mt-1 w-full border-2 border-gray-300 rounded-md p-2">
+                <option value="0">No</option>
+                <option value="1">Sí</option>
+            </select>
+                    </div>
+
+        <div class="flex items-center justify-end mt-4">
+            <a class="underline text-sm text-purple-600 hover:text-purple-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" href="/login">
+                Ya estás registrado?
+            </a>
+
+            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ml-3 bg-purple-600 text-white hover:bg-purple-700 focus:ring-2 focus:ring-yellow-500">
+    Registrarse
+</button>
+        </div>
+    </form>
+    </div>
+
+                </main>
+        </div>
+    </body>
+</html>
+
