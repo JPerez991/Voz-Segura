@@ -1,134 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Voz Segura</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Voz Segura — Tu Espacio Seguro</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&family=Lato:wght@100;300;400;700;900&family=Delius&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
 
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+    @vite(['resources/css/app.css'])
 
-        <style>
-        body {
-            font-family: 'Delius', sans-serif;
+    <style>
+        body { font-family: 'Delius', cursive; }
+        html { scroll-behavior: smooth; }
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(168,85,247,0.85) 0%, rgba(236,72,153,0.80) 50%, rgba(99,102,241,0.75) 100%);
         }
-        h1, h2 {
-            font-family: 'Delius', sans-serif;
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem !important; }
+            .hero-subtitle { font-size: 1.25rem !important; }
         }
     </style>
+</head>
+<body class="bg-purple-50 text-gray-800 antialiased">
 
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-5">
-                <a class="navbar-brand" href="#page-top">Voz segura</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Registrar</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Entrar</a></li>
-                    </ul>
-                </div>
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-purple-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <a href="#page-top" class="text-2xl font-bold text-purple-700 tracking-tight">Voz Segura</a>
+            <div class="flex items-center gap-6 text-sm">
+                <a href="{{ route('register') }}" class="text-purple-600 hover:text-purple-800 transition">Registrar</a>
+                <a href="{{ route('login') }}" class="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-full transition shadow-sm">Entrar</a>
             </div>
-        </nav>
-        <!-- Header-->
-        <header class="masthead text-center text-white">
-            <div class="masthead-content">
-                <div class="container px-5">
-                    <h1 class="masthead-heading mb-0">Bienvenidos </h1>
-                    <h2 class="masthead-subheading mb-0">A tu Espacio Seguro</h2>
-                    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Ver Mas</a>
-                </div>
-            </div>
-            <div class="bg-circle-1 bg-circle"></div>
-            <div class="bg-circle-2 bg-circle"></div>
-            <div class="bg-circle-3 bg-circle"></div>
-            <div class="bg-circle-4 bg-circle"></div>
-        </header>
-        <!-- Content section 1-->
-        <section id="scroll">
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6 order-lg-2">
-                        <div class="p-5">
-                            <picture>
-                                <source srcset="assets/img/01.webp" type="image/webp">
-                                <img class="img-fluid rounded-circle" src="assets/img/01.jpg" alt="..." />
-                            </picture>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 order-lg-1">
-                        <div class="p-5">
-                        <h2 class="display-4">Eres fuerte</h2>
-                        <p>Recuerda, eres más fuerte de lo que crees. No estás sola en esta lucha; a tu lado hay una comunidad dispuesta a apoyarte en cada paso del camino. Aunque enfrentemos desafíos, nuestra resiliencia y valentía son más poderosas que cualquier obstáculo. Juntas, somos invencibles, capaces de transformar el dolor en fuerza y la desesperanza en esperanza. No olvides que en cada caída, tienes la oportunidad de levantarte más fuerte que antes. Aquí encontrarás
-                        un espacio seguro para compartir tus experiencias, recibir apoyo y construir un futuro lleno de esperanza y empoderamiento.</p>
-                        </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="page-top" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-[url('/assets/img/hero-bg.webp')] bg-cover bg-center"></div>
+        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="relative z-10 text-center text-white px-6 max-w-3xl">
+            <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-4 drop-shadow-lg">Bienvenidos</h1>
+            <p class="hero-subtitle text-xl sm:text-2xl md:text-3xl font-light mb-8 drop-shadow-md">A tu Espacio Seguro</p>
+            <a href="#scroll" class="inline-block bg-white text-purple-700 hover:bg-purple-100 px-8 py-3 rounded-full text-lg font-semibold transition shadow-lg">Ver Más</a>
+        </div>
+        <!-- decorative dots -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </div>
+    </section>
+
+    <!-- Wave divider -->
+    <div class="relative -mt-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" class="w-full h-auto fill-purple-50">
+            <path d="M0,32L48,42.7C96,53,192,75,288,80C384,85,480,75,576,69.3C672,64,768,64,864,69.3C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32V120H0Z"/>
+        </svg>
+    </div>
+
+    <!-- Section 1: Eres fuerte -->
+    <section id="scroll" class="bg-purple-50 py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 flex-shrink-0">
+                    <div class="relative">
+                        <div class="absolute -top-3 -left-3 w-full h-full rounded-2xl border-2 border-purple-200"></div>
+                        <picture>
+                            <source srcset="assets/img/section-1.webp" type="image/webp">
+                            <img class="relative rounded-2xl shadow-lg w-full h-auto object-cover" src="assets/img/section-1.jpg" alt="Mujeres sonriendo juntas" />
+                        </picture>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- Content section 2-->
-        <section>
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                            <picture>
-                                <source srcset="assets/img/06.webp" type="image/webp">
-                                <img class="img-fluid rounded-circle" src="assets/img/06.jpg" alt="..." />
-                            </picture>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                        <h2 class="display-4">Nunca te rindas</h2>
-                        <p>No importa cuán difíciles sean los días, cada paso hacia adelante es una victoria en sí misma. La fortaleza se encuentra en la perseverancia, en la capacidad de levantarse una y otra vez, sin importar cuántas veces caigamos.
-                            A través de cada desafío, ganamos sabiduría, fuerza y una comprensión más profunda de nuestra propia capacidad para superar adversidades. Juntas, podemos superar cualquier obstáculo, apoyándonos mutuamente y recordándonos que,
-                            aunque el camino puede ser difícil, nunca estamos solas. Este es un lugar donde podemos encontrar la fuerza que necesitamos, aprender de nuestras experiencias y avanzar con determinación hacia un futuro mejor.</p>
-                              </div>
-                    </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl font-bold text-purple-800 mb-6">Eres fuerte</h2>
+                    <p class="text-lg leading-relaxed text-gray-600">
+                        Recuerda, eres más fuerte de lo que crees. No estás sola en esta lucha; a tu lado hay una comunidad dispuesta a apoyarte en cada paso del camino. Aunque enfrentemos desafíos, nuestra resiliencia y valentía son más poderosas que cualquier obstáculo. Juntas, somos invencibles, capaces de transformar el dolor en fuerza y la desesperanza en esperanza. No olvides que en cada caída, tienes la oportunidad de levantarte más fuerte que antes. Aquí encontrarás un espacio seguro para compartir tus experiencias, recibir apoyo y construir un futuro lleno de esperanza y empoderamiento.
+                    </p>
                 </div>
             </div>
-        </section>
-        <!-- Content section 3-->
-        <section>
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6 order-lg-2">
-                        <div class="p-5">
-                            <picture>
-                                <source srcset="assets/img/09.webp" type="image/webp">
-                                <img class="img-fluid" src="assets/img/09.png" alt="..." />
-                            </picture>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 order-lg-1">
-                        <div class="p-5">
-                        <h2 class="display-4">Juntas somos más fuertes</h2>
-                        <p>En este espacio, encontrarás apoyo y comprensión en cada momento. Aquí, cada voz es importante y cada historia tiene el poder de inspirar y transformar. Al compartir nuestras experiencias, creamos un lazo de empatía y solidaridad que nos fortalece a todas. Conectemos, compartamos y crezcamos juntas, sabiendo que en la unión encontramos la fortaleza para enfrentar cualquier desafío que se nos presente. Este es tu espacio seguro,
-                            un lugar donde puedes ser tú misma, donde puedes encontrar consuelo y donde juntas podemos construir un futuro lleno de esperanza y posibilidades. Recuerda que, unidas, somos capaces de lograr grandes cosas y superar cualquier adversidad.</p>
-                            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Nunca te rindas -->
+    <section class="bg-white py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+                <div class="md:w-1/2 flex-shrink-0">
+                    <div class="relative">
+                        <div class="absolute -top-3 -right-3 w-full h-full rounded-2xl border-2 border-pink-200"></div>
+                        <picture>
+                            <source srcset="assets/img/section-2.webp" type="image/webp">
+                            <img class="relative rounded-2xl shadow-lg w-full h-auto object-cover" src="assets/img/section-2.jpg" alt="Amigas abrazándose" />
+                        </picture>
                     </div>
                 </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl font-bold text-pink-700 mb-6">Nunca te rindas</h2>
+                    <p class="text-lg leading-relaxed text-gray-600">
+                        No importa cuán difíciles sean los días, cada paso hacia adelante es una victoria en sí misma. La fortaleza se encuentra en la perseverancia, en la capacidad de levantarse una y otra vez, sin importar cuántas veces caigamos. A través de cada desafío, ganamos sabiduría, fuerza y una comprensión más profunda de nuestra propia capacidad para superar adversidades. Juntas, podemos superar cualquier obstáculo, apoyándonos mutuamente y recordándonos que, aunque el camino puede ser difícil, nunca estamos solas. Este es un lugar donde podemos encontrar la fuerza que necesitamos, aprender de nuestras experiencias y avanzar con determinación hacia un futuro mejor.
+                    </p>
+                </div>
             </div>
-        </section>
-        <!-- Footer-->
-        <footer class="py-5 bg-black">
-            <div class="container px-5"><p class="m-0 text-center text-white small">VozSegura &copy; Your Website 2024</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous" defer></script>
-    </body>
+        </div>
+    </section>
+
+    <!-- Section 3: Juntas somos más fuertes -->
+    <section class="bg-purple-50 py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 flex-shrink-0">
+                    <div class="relative">
+                        <div class="absolute -top-3 -left-3 w-full h-full rounded-2xl border-2 border-rose-200"></div>
+                        <picture>
+                            <source srcset="assets/img/section-3.webp" type="image/webp">
+                            <img class="relative rounded-2xl shadow-lg w-full h-auto object-cover" src="assets/img/section-3.jpg" alt="Grupo de mujeres apoyándose" />
+                        </picture>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl font-bold text-rose-600 mb-6">Juntas somos más fuertes</h2>
+                    <p class="text-lg leading-relaxed text-gray-600">
+                        En este espacio, encontrarás apoyo y comprensión en cada momento. Aquí, cada voz es importante y cada historia tiene el poder de inspirar y transformar. Al compartir nuestras experiencias, creamos un lazo de empatía y solidaridad que nos fortalece a todas. Conectemos, compartamos y crezcamos juntas, sabiendo que en la unión encontramos la fortaleza para enfrentar cualquier desafío que se nos presente. Este es tu espacio seguro, un lugar donde puedes ser tú misma, donde puedes encontrar consuelo y donde juntas podemos construir un futuro lleno de esperanza y posibilidades. Recuerda que, unidas, somos capaces de lograr grandes cosas y superar cualquier adversidad.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 py-10">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-purple-200 text-sm">&copy; Voz Segura 2024. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
 </html>
