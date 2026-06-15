@@ -9,6 +9,14 @@ if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
     require __DIR__.'/../storage/framework/maintenance.php';
 }
 
+$_ENV['APP_ENV'] = $_ENV['APP_ENV'] ?? 'production';
+$_ENV['APP_DEBUG'] = $_ENV['APP_DEBUG'] ?? 'true';
+$_ENV['LOG_CHANNEL'] = 'errorlog';
+
+putenv('APP_ENV=' . $_ENV['APP_ENV']);
+putenv('APP_DEBUG=' . $_ENV['APP_DEBUG']);
+putenv('LOG_CHANNEL=errorlog');
+
 require __DIR__.'/../vendor/autoload.php';
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
