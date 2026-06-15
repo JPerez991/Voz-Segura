@@ -3,69 +3,55 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\Profile;
-use Illuminate\Auth\Events\Registered;
+use App\Services\CacheStorageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
     public function create(): View
     {
         return view('auth.register');
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, CacheStorageService $cache): RedirectResponse
     {
-        // Validación de los datos
-        $validatedData = $request->validate([
+        $request->validate([
             'nombre_usuario' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'rol' => ['required', 'string', 'max:255'],
             'es_anonimo' => ['required', 'boolean'],
-            // Agregar aquí cualquier otro campo que necesites validar
         ]);
-    
-        try {
-            // Creación del usuario
-            $user = User::create([
-                'nombre_usuario' => $validatedData['nombre_usuario'],
-                'email' => $validatedData['email'],
-                'password' => Hash::make($validatedData['password']),
-                'rol' => $validatedData['rol'],
-                'es_anonimo' => $validatedData['es_anonimo'],
-            ]);
-    
-            // Creación del perfil asociado al usuario
-            Profile::create([
-                'user_id' => $user->id,
-                'nombre_completo' => $validatedData['nombre_usuario'], // Usar el nombre de usuario como nombre completo
-                'descripcion' => $request->input('descripcion'),
-                'nombre_anonimo' => $request->input('nombre_anonimo'),
-            ]);
-    
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'Error al registrar el usuario: ' . $e->getMessage()]);
+
+        $existingUser = $cache->findFirstWhere(CacheStorageService::USERS_KEY, function ($u) use ($request) {
+            return $u['nombre_usuario'] === $request->nombre_usuario || $u['email'] === $request->email;
+        });
+
+        if ($existingUser) {
+            return back()->withErrors(['nombre_usuario' => 'El nombre de usuario o email ya existe.'])->withInput();
         }
-    
-        // Iniciar sesión después del registro
-        auth()->login($user);
-    
-        // Redirigir a la vista del perfil o donde desees
-        return redirect()->route('profile.edit')->with('success', 'User registered successfully.');
+
+        $user = $cache->create(CacheStorageService::USERS_KEY, [
+            'nombre_usuario' => $request->nombre_usuario,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'rol' => $request->rol,
+            'es_anonimo' => $request->boolean('es_anonimo'),
+        ]);
+
+        $cache->create(CacheStorageService::PROFILES_KEY, [
+            'user_id' => $user['id'],
+            'nombre_completo' => $request->nombre_usuario,
+            'descripcion' => $request->input('descripcion', ''),
+            'nombre_anonimo' => $request->input('nombre_anonimo'),
+        ]);
+
+        Auth::loginUsingId($user['id']);
+
+        return redirect()->route('dashboard')->with('success', 'Usuario registrado exitosamente.');
     }
-    
 }

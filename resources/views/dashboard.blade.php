@@ -13,7 +13,7 @@
         <!-- Sección de Servicios -->
         <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Tarjeta Chat de Apoyo -->
-            <a href="{{ route('messages.index') }}" class="block group">
+            <a href="{{ route('messages.index', 2) }}" class="block group">
                 <x-card class="transition transform hover:scale-105">
                     <x-card-header>
                         <x-card-title>

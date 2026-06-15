@@ -2,122 +2,131 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\Profile; // Asegúrate de importar el modelo
+use App\Services\CacheStorageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Forum;  // Asegúrate de importar el modelo Forum
-use App\Models\forums;
-use Illuminate\Support\Facades\Auth; // Asegúrate de importar Auth
-
-
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Mostrar el formulario de edición del perfil.
-     */
-    public function edit(Request $request): View
+    public function dashboard(Request $request, CacheStorageService $cache): View
     {
-        return view('profile.edit', [
+        $userId = Auth::id();
+        $profile = $cache->findFirstWhere(CacheStorageService::PROFILES_KEY, function ($p) use ($userId) {
+            return ($p['user_id'] ?? null) === $userId;
+        });
+        return view('dashboard', [
             'user' => $request->user(),
-            'profile' => $request->user()->profile, // Cargar el perfil del usuario
+            'profile' => (object) ($profile ?? []),
         ]);
     }
 
-    /**
-     * Actualizar el perfil del usuario.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-{
-    $user = $request->user(); // Definir el usuario
-    $profile = $request->user()->profile;
-
-    if (!$profile) {
-        // Crear un nuevo perfil si no existe
-        $profile = new Profile();
-        $profile->user_id = $request->user()->id; // Asignar el ID del usuario
-    }
-
-    // Actualizar el correo
-    $user->email = $request->email;
-
-       // Si se proporciona una nueva contraseña, actualizarla
-       if ($request->filled('password')) {
-        $user->password = Hash::make($request->password);
-    }
-
-
-    // Rellenar el perfil con los datos validados
-    $profile->nombre_completo = $request->input('nombre_completo');
-    $profile->descripcion = $request->input('descripcion');
-    $profile->nombre_anonimo = $request->input('nombre_anonimo');
-
-
-    $profile->save(); // Guardar los cambios
-    $user->save(); // Guardar el usuario
-
-    return Redirect::route('profile.edit')->with('status', 'Profile updated successfully.');
-
-}
-
-
-    
-
-    /**
-     * Crear un nuevo perfil para el usuario.
-     */
-    public function store(Request $request): RedirectResponse
+    public function show(CacheStorageService $cache): View
     {
+        $userId = Auth::id();
+        $profile = $cache->findFirstWhere(CacheStorageService::PROFILES_KEY, function ($p) use ($userId) {
+            return $p['user_id'] === $userId;
+        });
+        return view('profile', ['profile' => (object) ($profile ?? [])]);
+    }
+
+    public function edit(Request $request, CacheStorageService $cache): View
+    {
+        $userId = $request->user()->id;
+        $profile = $cache->findFirstWhere(CacheStorageService::PROFILES_KEY, function ($p) use ($userId) {
+            return $p['user_id'] === $userId;
+        });
+        return view('profile.edit', [
+            'user' => $request->user(),
+            'profile' => (object) ($profile ?? []),
+        ]);
+    }
+
+    public function update(Request $request, CacheStorageService $cache): RedirectResponse
+    {
+        $user = $request->user();
+        $userId = $user->id;
+
         $request->validate([
             'nombre_completo' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'nombre_anonimo' => 'nullable|string',
+            'email' => 'required|email',
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
 
-        $profile = new Profile();
-        $profile->user_id = $request->user()->id; // Asignar user_id
-        $profile->nombre_completo = $request->input('nombre_completo');
-        $profile->descripcion = $request->input('descripcion');
-        $profile->nombre_anonimo = $request->input('nombre_anonimo');
-        $profile->save();
+        $cache->update(CacheStorageService::USERS_KEY, $userId, [
+            'email' => $request->email,
+            'password' => $request->filled('password') ? Hash::make($request->password) : $user->password,
+        ]);
 
-        return redirect()->route('profile.edit')->with('success', 'Profile created successfully.');
-    }
+        $existingProfile = $cache->findFirstWhere(CacheStorageService::PROFILES_KEY, function ($p) use ($userId) {
+            return $p['user_id'] === $userId;
+        });
 
-    /**
-     * Eliminar el perfil del usuario.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $profile = $request->user()->profile;
-
-        if ($profile) {
-            $profile->delete(); // Eliminar el perfil
+        if ($existingProfile) {
+            $cache->update(CacheStorageService::PROFILES_KEY, $existingProfile['id'], [
+                'nombre_completo' => $request->nombre_completo,
+                'descripcion' => $request->descripcion ?? '',
+                'nombre_anonimo' => $request->nombre_anonimo,
+            ]);
+        } else {
+            $cache->create(CacheStorageService::PROFILES_KEY, [
+                'user_id' => $userId,
+                'nombre_completo' => $request->nombre_completo,
+                'descripcion' => $request->descripcion ?? '',
+                'nombre_anonimo' => $request->nombre_anonimo,
+            ]);
         }
 
-        return redirect()->route('welcome2')->with('success', 'Profile deleted successfully.');
+        try {
+            $dbUser = \App\Models\User::find($userId);
+            if ($dbUser) {
+                $dbUser->email = $request->email;
+                if ($request->filled('password')) {
+                    $dbUser->password = Hash::make($request->password);
+                }
+                $dbUser->save();
+            }
+            $profile = \App\Models\Profile::where('user_id', $userId)->first();
+            if ($profile) {
+                $profile->nombre_completo = $request->nombre_completo;
+                $profile->descripcion = $request->descripcion;
+                $profile->nombre_anonimo = $request->nombre_anonimo;
+                $profile->save();
+            }
+        } catch (\Exception $e) {
+        }
+
+        return redirect()->route('profile.edit')->with('status', 'Profile updated successfully.');
     }
 
-    /**
-     * Mostrar el dashboard con la información del perfil del usuario.
-     */
-    public function dashboard(Request $request): View
+    public function destroy(Request $request, CacheStorageService $cache): RedirectResponse
     {
-        return view('dashboard', [
-            'user' => $request->user(),
-            'profile' => $request->user()->profile, // Cargar el perfil del usuario
-            'rol' => $request->user(),
-        ]);
+        $userId = $request->user()->id;
 
-       
+        $cache->deleteWhere(CacheStorageService::PROFILES_KEY, function ($p) use ($userId) {
+            return ($p['user_id'] ?? null) === $userId;
+        });
+
+        try {
+            $profile = \App\Models\Profile::where('user_id', $userId)->first();
+            if ($profile) {
+                $profile->delete();
+            }
+            $dbUser = \App\Models\User::find($userId);
+            if ($dbUser) {
+                $dbUser->delete();
+            }
+        } catch (\Exception $e) {
+        }
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
-
-
-    
-
-  
 }

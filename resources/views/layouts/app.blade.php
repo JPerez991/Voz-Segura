@@ -7,19 +7,16 @@
 
         <title>{{ config('app.name', 'VozSegura') }}</title>
 
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet"> <!-- Cambié esto -->
+        <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
 
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body  class="font-delius antialiased">
+    <body class="font-delius antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
-            <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -28,58 +25,16 @@
                 </header>
             @endif
 
-            <!-- Page Content -->
             <main>
+                @if (session('success'))
+                    <div class="max-w-7xl mx-auto mt-4 px-4">
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+                            {{ session('success') }}
+                        </div>
+                    </div>
+                @endif
                 @yield('content')
             </main>
         </div>
-<script>
-(function() {
-    if (!localStorage.getItem('voz_users')) {
-        localStorage.setItem('voz_users', JSON.stringify([
-            { id: 1, nombre_usuario: 'Maria_G', email: 'maria@ejemplo.com', password: 'password', rol: 'usuaria', nombre_completo: 'Maria García López', descripcion: 'Mujer en busca de apoyo emocional', nombre_anonimo: 'Mariposa' },
-            { id: 2, nombre_usuario: 'Lic_Carmen', email: 'carmen@psicologa.com', password: 'password', rol: 'psicologa', nombre_completo: 'Dra. Carmen Martínez', descripcion: 'Psicóloga clínica', nombre_anonimo: null },
-            { id: 3, nombre_usuario: 'Ana_98', email: 'ana@ejemplo.com', password: 'password', rol: 'usuaria', nombre_completo: 'Ana Rodríguez Pérez', descripcion: 'Madre de dos hijos', nombre_anonimo: 'Estrella' }
-        ]));
-    }
-
-    try {
-        var raw = localStorage.getItem('voz_currentUser');
-        var path = window.location.pathname;
-        var publicPages = ['/', '/login', '/register', '/welcome2'];
-
-        if (!raw && publicPages.indexOf(path) === -1) {
-            window.location.href = '/login';
-            return;
-        }
-        if (!raw) return;
-
-        var user = JSON.parse(raw);
-        if (!user || !user.id) return;
-
-        var navEl = document.getElementById('nav-username');
-        if (navEl) navEl.textContent = user.nombre_usuario || 'Usuario';
-
-        if (path === '/dashboard') {
-            var container = document.getElementById('profile-card-container');
-            if (container) {
-                var firstLetter = user.nombre_completo ? user.nombre_completo.charAt(0) : (user.nombre_usuario ? user.nombre_usuario.charAt(0) : '?');
-                var card = document.createElement('div');
-                card.className = 'bg-white rounded-lg shadow-md p-6 flex items-center space-x-4';
-                card.innerHTML = '<div class="w-16 h-16 rounded-full bg-purple-200 flex items-center justify-center text-2xl font-bold text-purple-700">' + firstLetter + '</div>' +
-                    '<div>' +
-                    '<h2 class="text-xl font-semibold text-purple-900">' + (user.nombre_completo || user.nombre_usuario || 'Usuario') + '</h2>' +
-                    '<p class="text-sm text-purple-600">' + (user.rol === 'psicologa' ? 'Psicóloga' : 'Usuaria') + '</p>' +
-                    '<p class="text-sm text-gray-500">' + (user.descripcion || '') + '</p>' +
-                    '</div>';
-                container.appendChild(card);
-            }
-        }
-    } catch (e) {
-        localStorage.removeItem('voz_currentUser');
-    }
-})();
-</script>
     </body>
 </html>
-

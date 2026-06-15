@@ -32,7 +32,7 @@
             </div>
             <div class="mb-4">
                 <label for="fecha_hora" class="block text-gray-700">Fecha y Hora</label>
-                <input type="datetime-local" class="block w-full mt-1 p-2 border border-gray-300 rounded-lg" id="fecha_hora" name="fecha_hora" value="{{ $session->fecha_hora->format('Y-m-d\TH:i') }}" required>
+                <input type="datetime-local" class="block w-full mt-1 p-2 border border-gray-300 rounded-lg" id="fecha_hora" name="fecha_hora" value="{{ is_string($session->fecha_hora) ? substr($session->fecha_hora, 0, 16) : $session->fecha_hora->format('Y-m-d\TH:i') }}" required>
             </div>
             <button type="submit" class="btn btn-primary inline-block px-6 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg">Actualizar Sesión</button>
         </form>

@@ -3,58 +3,52 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Services\CacheStorageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
     public function create(): View
     {
-        return view('auth.login'); // Asegúrate de que este sea el nombre correcto de la vista
+        return view('auth.login');
     }
 
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, CacheStorageService $cache): RedirectResponse
     {
-        // Validar los campos de entrada
         $request->validate([
             'nombre_usuario' => ['required', 'string'],
             'contraseña' => ['required', 'string'],
         ]);
 
-        // Intentar autenticar al usuario
         if (Auth::attempt(['nombre_usuario' => $request->nombre_usuario, 'password' => $request->contraseña])) {
-            // Regenerar la sesión
             $request->session()->regenerate();
-
-            // Redirigir a la ruta de destino (profile)
             return redirect()->route('dashboard');
         }
 
-        // Si la autenticación falla, redirigir de nuevo con un mensaje de error
+        $user = $cache->findFirstWhere(CacheStorageService::USERS_KEY, function ($u) use ($request) {
+            return $u['nombre_usuario'] === $request->nombre_usuario;
+        });
+
+        if ($user && Hash::check($request->contraseña, $user['password'])) {
+            Auth::loginUsingId($user['id']);
+            $request->session()->regenerate();
+            return redirect()->route('dashboard');
+        }
+
         return back()->withErrors([
             'nombre_usuario' => 'Las credenciales proporcionadas son incorrectas.',
-        ]);
+        ])->onlyInput('nombre_usuario');
     }
 
-    /**
-     * Destroy an authenticated session.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
-        return redirect('/'); // Redirige a la ruta de tu dashboard
+        return redirect('/');
     }
 }
