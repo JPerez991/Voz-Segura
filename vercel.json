@@ -12,6 +12,7 @@
     { "src": "/register", "dest": "/register.html" },
     { "src": "/dashboard", "dest": "/dashboard.html" },
     { "src": "/forums/create", "dest": "/forums/create.html" },
+    { "src": "/forums", "dest": "/forums.html" },
     { "src": "/forums/(.*)", "dest": "/forums/$1.html" },
     { "src": "/sessions/create", "dest": "/sessions/create.html" },
     { "src": "/sessions", "dest": "/sessions.html" },
