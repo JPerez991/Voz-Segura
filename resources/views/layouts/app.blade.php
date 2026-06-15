@@ -35,36 +35,48 @@
         </div>
 <script>
 (function() {
-    var raw = localStorage.getItem('voz_currentUser');
-    var path = window.location.pathname;
-    var publicPages = ['/', '/login', '/register', '/welcome2'];
-
-    if (!raw && publicPages.indexOf(path) === -1) {
-        window.location.href = '/login';
-        return;
+    if (!localStorage.getItem('voz_users')) {
+        localStorage.setItem('voz_users', JSON.stringify([
+            { id: 1, nombre_usuario: 'Maria_G', email: 'maria@ejemplo.com', password: 'password', rol: 'usuaria', nombre_completo: 'Maria García López', descripcion: 'Mujer en busca de apoyo emocional', nombre_anonimo: 'Mariposa' },
+            { id: 2, nombre_usuario: 'Lic_Carmen', email: 'carmen@psicologa.com', password: 'password', rol: 'psicologa', nombre_completo: 'Dra. Carmen Martínez', descripcion: 'Psicóloga clínica', nombre_anonimo: null },
+            { id: 3, nombre_usuario: 'Ana_98', email: 'ana@ejemplo.com', password: 'password', rol: 'usuaria', nombre_completo: 'Ana Rodríguez Pérez', descripcion: 'Madre de dos hijos', nombre_anonimo: 'Estrella' }
+        ]));
     }
-    if (!raw) return;
 
-    var user = JSON.parse(raw);
+    try {
+        var raw = localStorage.getItem('voz_currentUser');
+        var path = window.location.pathname;
+        var publicPages = ['/', '/login', '/register', '/welcome2'];
 
-    var navEl = document.getElementById('nav-username');
-    if (navEl) navEl.textContent = user.nombre_usuario || 'Usuario';
-
-    if (path === '/dashboard') {
-        var container = document.getElementById('profile-card-container');
-        if (container) {
-            var card = document.createElement('div');
-            card.className = 'bg-white rounded-lg shadow-md p-6 flex items-center space-x-4';
-            card.innerHTML = '<div class="w-16 h-16 rounded-full bg-purple-200 flex items-center justify-center text-2xl font-bold text-purple-700">' +
-                (user.nombre_completo ? user.nombre_completo.charAt(0) : user.nombre_usuario.charAt(0)) +
-                '</div>' +
-                '<div>' +
-                '<h2 class="text-xl font-semibold text-purple-900">' + (user.nombre_completo || user.nombre_usuario) + '</h2>' +
-                '<p class="text-sm text-purple-600">' + (user.rol === 'psicologa' ? 'Psicóloga' : 'Usuaria') + '</p>' +
-                '<p class="text-sm text-gray-500">' + (user.descripcion || '') + '</p>' +
-                '</div>';
-            container.appendChild(card);
+        if (!raw && publicPages.indexOf(path) === -1) {
+            window.location.href = '/login';
+            return;
         }
+        if (!raw) return;
+
+        var user = JSON.parse(raw);
+        if (!user || !user.id) return;
+
+        var navEl = document.getElementById('nav-username');
+        if (navEl) navEl.textContent = user.nombre_usuario || 'Usuario';
+
+        if (path === '/dashboard') {
+            var container = document.getElementById('profile-card-container');
+            if (container) {
+                var firstLetter = user.nombre_completo ? user.nombre_completo.charAt(0) : (user.nombre_usuario ? user.nombre_usuario.charAt(0) : '?');
+                var card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-md p-6 flex items-center space-x-4';
+                card.innerHTML = '<div class="w-16 h-16 rounded-full bg-purple-200 flex items-center justify-center text-2xl font-bold text-purple-700">' + firstLetter + '</div>' +
+                    '<div>' +
+                    '<h2 class="text-xl font-semibold text-purple-900">' + (user.nombre_completo || user.nombre_usuario || 'Usuario') + '</h2>' +
+                    '<p class="text-sm text-purple-600">' + (user.rol === 'psicologa' ? 'Psicóloga' : 'Usuaria') + '</p>' +
+                    '<p class="text-sm text-gray-500">' + (user.descripcion || '') + '</p>' +
+                    '</div>';
+                container.appendChild(card);
+            }
+        }
+    } catch (e) {
+        localStorage.removeItem('voz_currentUser');
     }
 })();
 </script>
